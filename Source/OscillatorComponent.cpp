@@ -8,7 +8,6 @@
   ==============================================================================
 */
 
-#include "../JuceLibraryCode/JuceHeader.h"
 #include "OscillatorComponent.h"
 
 //==============================================================================
@@ -20,17 +19,14 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
     /*oscillatorGroup = new GroupComponent;
-    
-
     amplitudeSlider = new Slider;
     amplitudeLabel = new Label;*/
+    
     setSize (5 * paramLabelWidth + 6, 3 * paramControlHeight + 13);
 
-    
-    
     //oscillatorGroup
-    /*oscillatorGroup.setText("Oscillator");
-    addAndMakeVisible (oscillatorGroup);*/
+    oscillatorGroup.setText("Oscillator");
+    addAndMakeVisible (oscillatorGroup);
     
     //amplitude
     //Label
@@ -40,7 +36,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     amplitudeSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     amplitudeSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);
     addAndMakeVisible (amplitudeLabel);
-        
 
     //Slider
     /*amplitudeSlider.setSliderStyle (Slider::RotaryVerticalDrag);
@@ -48,13 +43,12 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     amplitudeSlider.setTextBoxStyle (Slider::NoTextBox, true, paramSliderWidth,paramLabelHeight);
     amplitudeSlider.setPopupDisplayEnabled (true, this);
     amplitudeSlider.setTextValueSuffix (" dB");
-    amplitudeSlider.setValue (1.0);
+    amplitudeSlider.setValue (1.);
     amplitudeSlider.setComponentID("amplitude");*/
     addAndMakeVisible (amplitudeSlider);
     amplitudeAttachment = new SliderAttachment (valueTreeState, "amplitude", amplitudeSlider);
     
-   //pan
-    panLabel.setFont (Font (12.00f, Font::plain));     
+   //pan  
     panLabel.setText ("pan", dontSendNotification);
     addAndMakeVisible (panLabel);
     
@@ -63,7 +57,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     addAndMakeVisible (panSlider);
     panAttachment = new SliderAttachment (valueTreeState, "pan", panSlider);
         
-    waveTypeLabel.setFont (Font (12.00f, Font::plain));     
     waveTypeLabel.setText ("waveType", dontSendNotification);
     addAndMakeVisible (waveTypeLabel);
     
@@ -72,7 +65,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     addAndMakeVisible (waveTypeSlider);
     waveTypeAttachment = new SliderAttachment (valueTreeState, "waveType", waveTypeSlider);
     
-    phaseLabel.setFont (Font (12.00f, Font::plain));     
     phaseLabel.setText ("phase", dontSendNotification);
     addAndMakeVisible (phaseLabel);
     
@@ -81,7 +73,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     addAndMakeVisible (phaseSlider);
     phaseAttachment = new SliderAttachment (valueTreeState, "phase", phaseSlider);
     
-    pitchLabel.setFont (Font (12.00f, Font::plain));     
     pitchLabel.setText ("pitch", dontSendNotification);
     addAndMakeVisible (pitchLabel);
         
@@ -90,7 +81,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     addAndMakeVisible (pitchSlider);
     pitchAttachment = new SliderAttachment (valueTreeState, "pitch", pitchSlider);
     
-    fineLabel.setFont (Font (12.00f, Font::plain));     
     fineLabel.setText ("fine", dontSendNotification);
     addAndMakeVisible (fineLabel);
     
@@ -99,7 +89,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     addAndMakeVisible (fineSlider);
     fineAttachment = new SliderAttachment (valueTreeState, "fine", pitchSlider);
     
-    voiceNumberLabel.setFont (Font (12.00f, Font::plain));     
     voiceNumberLabel.setText ("voiceNumber", dontSendNotification);
     addAndMakeVisible (voiceNumberLabel);
     
@@ -107,8 +96,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     voiceNumberSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);    
     addAndMakeVisible (voiceNumberSlider);
     voiceNumberAttachment = new SliderAttachment (valueTreeState, "voiceNumber", voiceNumberSlider);
-    
-    pulseWidthLabel.setFont (Font (12.00f, Font::plain));     
+
     pulseWidthLabel.setText ("pulseWidth", dontSendNotification);
     addAndMakeVisible (pulseWidthLabel);
     
@@ -118,7 +106,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     pulseWidthAttachment = new SliderAttachment (valueTreeState, "pulseWidth", pulseWidthSlider);
     
     
-    detuneLabel.setFont (Font (12.00f, Font::plain));     
     detuneLabel.setText ("detune", dontSendNotification);
     addAndMakeVisible (detuneLabel);
     
@@ -126,8 +113,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     detuneSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);      
     addAndMakeVisible (detuneSlider);
     detuneAttachment = new SliderAttachment (valueTreeState, "detune", detuneSlider);
-        
-    spreadLabel.setFont (Font (12.00f, Font::plain));         
+    
     spreadLabel.setText ("spread", dontSendNotification);
     addAndMakeVisible (spreadLabel);
     
@@ -137,8 +123,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     spreadAttachment = new SliderAttachment (valueTreeState, "spread", spreadSlider);
     
     //retrig
-    retrigLabel.setFont (Font (12.00f, Font::plain));
-    retrigLabel.setJustificationType (Justification::centred);
     retrigLabel.setEditable (false, false, false);
     retrigLabel.setColour (TextEditor::textColourId, Colours::black);
     retrigLabel.setColour (TextEditor::backgroundColourId, Colour (0x00000000));
@@ -149,8 +133,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     retrigAttachment = new ButtonAttachment (valueTreeState, "retrig", retrigButton);
     
     //fixed
-    fixedLabel.setFont (Font (12.00f, Font::plain));
-    fixedLabel.setJustificationType (Justification::centred);
     fixedLabel.setEditable (false, false, false);
     fixedLabel.setColour (TextEditor::textColourId, Colours::black);
     fixedLabel.setColour (TextEditor::backgroundColourId, Colour (0x00000000));
@@ -165,9 +147,9 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
 
 OscillatorComponent::~OscillatorComponent()
 {
-    /*delete oscillatorGroup;
+    //delete oscillatorGroup;
 
-    delete amplitude;*/
+    //delete amplitude;
 
 }
 
@@ -181,27 +163,24 @@ void OscillatorComponent::paint (Graphics& g)
     */
 
     
-    /*g.setColour (Colours::yellow);
+    g.setColour (Colours::yellow);
     
-    const float lineThickness = 3.0f;
-    g.drawEllipse (lineThickness * 0.5f,
-                   lineThickness * 0.5f,
-                   getWidth() - lineThickness,
-                   getHeight() - lineThickness,
-                   lineThickness);*/
 }
 
 void OscillatorComponent::resized()
 {
     // This method is where you should set the bounds of any child
     // components that your component contains..
-    
+    //component.getLocalBounds() always returns a rectangle that is at position (0, 0) with the same width and height as the component
 
-    /*oscillatorGroup.setBounds(getLocalBounds());*///pour avoir les bounds donnés par le parent
     Rectangle<int> r = getLocalBounds();
+    
+    //oscillatorGroup
+    oscillatorGroup.setBounds(r);
+    
     r.removeFromTop(13);
     r.removeFromLeft(3);
-    Rectangle<int> slidersArea = r.removeFromTop((paramControlHeight + paramLabelHeight) *2);
+    Rectangle<int> slidersArea = r.removeFromTop((paramSliderHeight + paramLabelHeight) *2);
     {
     //amplitude
     Rectangle<int> amplitudeRect = slidersArea.removeFromLeft (paramSliderWidth);
@@ -257,12 +236,6 @@ void OscillatorComponent::resized()
     amplitudeRect = r.removeFromLeft (paramLabelWidth);
     fixedLabel.setBounds (amplitudeRect.removeFromTop (paramLabelHeight));
     fixedButton.setBounds (amplitudeRect.removeFromTop(paramSliderHeight));
-    /*
-    Rectangle<int> retrigRect = r.removeFromLeft (paramSliderWidth);
-    retrigLabel.setBounds (retrigRect.removeFromTop (paramLabelHeight));
-    retrigSlider.setBounds (retrigRect);*/
-            
-
     }
 
 }

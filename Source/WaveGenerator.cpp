@@ -9,7 +9,7 @@
 */
 
 #include "WaveGenerator.h"
-#include "../JuceLibraryCode/JuceHeader.h"
+
 //constructeurs et destructeurs
 //Constructeur par défault et surchargé
 WaveGenerator::WaveGenerator(

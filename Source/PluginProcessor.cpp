@@ -9,8 +9,6 @@
 */
 
 #include "PluginProcessor.h"
-#include "PluginEditor.h"
-
 
 //==============================================================================
 SuperSynthAudioProcessor::SuperSynthAudioProcessor()
@@ -80,7 +78,7 @@ SuperSynthAudioProcessor::SuperSynthAudioProcessor()
                                   "amplitude",       // parameter name
                                   String(),     // parameter label (suffix)
                                   NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  1.0f,         // default value
+                                  0.5f,         // default value
                                   nullptr,
                                   nullptr);
                                   
@@ -146,7 +144,7 @@ SuperSynthAudioProcessor::SuperSynthAudioProcessor()
                                   "voiceNumber",       // parameter name
                                   String(),     // parameter label (suffix)
                                   NormalisableRange<float> (0.0f, 8.0f, 1.0f),    // range
-                                  8.0f,         // default value
+                                  6.0f,         // default value
                                   nullptr,
                                   nullptr);
                                   
@@ -154,7 +152,7 @@ SuperSynthAudioProcessor::SuperSynthAudioProcessor()
                                   "detune",       // parameter name
                                   String(),     // parameter label (suffix)
                                   NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
+                                  0.2f,         // default value
                                   nullptr,
                                   nullptr);
 
@@ -162,7 +160,7 @@ SuperSynthAudioProcessor::SuperSynthAudioProcessor()
                                   "spread",       // parameter name
                                   String(),     // parameter label (suffix)
                                   NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
+                                  0.5f,         // default value
                                   nullptr,
                                   nullptr);
                                   

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="tFVaiP" name="SimpleSuperSynth" projectType="audioplug" version="0.1.0"
+              bundleIdentifier="com.Yeaah.SuperSynth" includeBinaryInAppConfig="1"
+              buildVST="1" buildVST3="0" buildAU="0" buildRTAS="0" buildAAX="0"
+              pluginName="SuperSynth" pluginDesc="SuperSynth" pluginManufacturer="Yeaah"
+              pluginManufacturerCode="Manu" pluginCode="Tfva" pluginChannelConfigs="{1, 1}, {2, 2}"
+              pluginIsSynth="1" pluginWantsMidiIn="1" pluginProducesMidiOut="1"
+              pluginSilenceInIsSilenceOut="0" pluginEditorRequiresKeys="0"
+              pluginAUExportPrefix="SuperSynthAU" pluginRTASCategory="" aaxIdentifier="com.yourcompany.SuperSynth"
+              pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="5.1.1"
+              pluginIsMidiEffectPlugin="0" buildAUv3="0" displaySplashScreen="1"
+              reportAppUsage="1" splashScreenColour="Dark" buildStandalone="0"
+              enableIAA="0" cppLanguageStandard="11" companyName="YEAAH">
+  <MAINGROUP id="E0hLrL" name="SimpleSuperSynth">
+    <GROUP id="{2E572B2F-BF6C-772C-805C-DC939BDAAD62}" name="Source">
+      <GROUP id="{EB229969-112F-64F7-341C-480AAF7DC0E5}" name="Components">
+        <FILE id="O7Z1ow" name="FilterComponent.cpp" compile="1" resource="0"
+              file="Source/FilterComponent.cpp"/>
+        <FILE id="FrZcPI" name="FilterComponent.h" compile="0" resource="0"
+              file="Source/FilterComponent.h"/>
+        <FILE id="y2p9Lm" name="OscillatorComponent.cpp" compile="1" resource="0"
+              file="Source/OscillatorComponent.cpp"/>
+        <FILE id="VfdECP" name="OscillatorComponent.h" compile="0" resource="0"
+              file="Source/OscillatorComponent.h"/>
+        <FILE id="BRswGx" name="SliderComponent.cpp" compile="1" resource="0"
+              file="Source/SliderComponent.cpp"/>
+        <FILE id="qmxBo1" name="SliderComponent.h" compile="0" resource="0"
+              file="Source/SliderComponent.h"/>
+        <FILE id="XdEWMu" name="SliderRotaryVerticalDrag.cpp" compile="1" resource="0"
+              file="Source/SliderRotaryVerticalDrag.cpp"/>
+        <FILE id="iVc2az" name="SliderRotaryVerticalDrag.h" compile="0" resource="0"
+              file="Source/SliderRotaryVerticalDrag.h"/>
+      </GROUP>
+      <FILE id="ifFeKl" name="OtherLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/OtherLookAndFeel.cpp"/>
+      <FILE id="TeQuCl" name="OtherLookAndFeel.h" compile="0" resource="0"
+            file="Source/OtherLookAndFeel.h"/>
+      <FILE id="GsW1k6" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="IcMSby" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="j4n7Bk" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="KZW0wz" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="H59wLi" name="SineWaveSound.cpp" compile="1" resource="0"
+            file="Source/SineWaveSound.cpp"/>
+      <FILE id="waRWsM" name="SineWaveSound.h" compile="0" resource="0" file="Source/SineWaveSound.h"/>
+      <FILE id="IOCBUZ" name="SineWaveSynth.cpp" compile="1" resource="0"
+            file="Source/SineWaveSynth.cpp"/>
+      <FILE id="FgTyz0" name="SineWaveSynth.h" compile="0" resource="0" file="Source/SineWaveSynth.h"/>
+      <FILE id="YDPXTK" name="SineWaveVoice.cpp" compile="1" resource="0"
+            file="Source/SineWaveVoice.cpp"/>
+      <FILE id="WxnXqN" name="SineWaveVoice.h" compile="0" resource="0" file="Source/SineWaveVoice.h"/>
+      <FILE id="mMGEnx" name="SuperWaveGenerator.cpp" compile="1" resource="0"
+            file="Source/SuperWaveGenerator.cpp"/>
+      <FILE id="XPUkI1" name="SuperWaveGenerator.h" compile="0" resource="0"
+            file="Source/SuperWaveGenerator.h"/>
+      <FILE id="MocnLu" name="WaveGenerator.cpp" compile="1" resource="0"
+            file="Source/WaveGenerator.cpp"/>
+      <FILE id="ybfnjn" name="WaveGenerator.h" compile="0" resource="0" file="Source/WaveGenerator.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       isDebug="1" optimisation="1" targetName="SuperSynth"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       isDebug="0" optimisation="3" targetName="SuperSynth"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_video" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_osc" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_opengl" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_gui_extra" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_gui_basics" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_graphics" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_events" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_data_structures" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_cryptography" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_core" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_box2d" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_utils" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_processors" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_formats" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_devices" path="..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_basics" path="..\..\..\JUCE\modules"/>
+      </MODULEPATHS>
+    </VS2017>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_box2d" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="0"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <WINDOWS enableCxx11="1"/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS JUCE_QUICKTIME="disabled"/>
+</JUCERPROJECT>

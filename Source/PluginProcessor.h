@@ -13,6 +13,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "SineWaveVoice.h"
 #include "SineWaveSound.h"
+#include "PluginEditor.h"
+
 //==============================================================================
 /**
 */

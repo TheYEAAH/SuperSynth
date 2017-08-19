@@ -9,8 +9,7 @@
 */
 
 #include "superwavegenerator.h"
-#include "../JuceLibraryCode/JuceHeader.h"
-#include "math.h"
+
 //Constructeur par défault et surchargé
 SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters, float frequency)
 : parameters(parameters), frequency(frequency)
