@@ -12,7 +12,7 @@
 #include "PluginProcessor.h"
 #include "OscillatorComponent.h"
 #include "FilterComponent.h"
-#include "LFOComponent.h"
+#include "OtherLookAndFeel.h"
 
 //==============================================================================
 /** Class that acts as the GUI for the SimpleSuperSynthAudioProcessor.
@@ -23,29 +23,33 @@ class SuperSynthAudioProcessorEditor  : public AudioProcessorEditor
 public:
     enum
     {
-        paramControlHeight = 54,
-        paramLabelHeight   = 20,
-        paramLabelWidth    = 60,
-        paramSliderWidth   = 60
+        paramControlHeight = 64,
+        paramLabelHeight   = 12,
+        paramLabelWidth    = 52,
+        paramSliderWidth   = 52,
+        paramSliderHeight  = 52
     };
 
     typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
     typedef AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
     
+    /** Creates a SuperSynthAudioProcessorEditor. */
     SuperSynthAudioProcessorEditor (AudioProcessor& parent, AudioProcessorValueTreeState& vts);
 
     ~SuperSynthAudioProcessorEditor();
-
+    
+    /** Implementation of the AudioProcessorEditor method. */
     void resized() override;
     
     /** Implementation of the AudioProcessorEditor method. */
-
     void paint (Graphics& g) override;
     
-    /** Implementation of the AudioProcessorEditor method. */
+
     
 private:
+    OtherLookAndFeel otherLookAndFeel;
     AudioProcessorValueTreeState& valueTreeState; 
     OscillatorComponent * oscillator;
     FilterComponent * filter;
+
 };

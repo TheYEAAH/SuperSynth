@@ -10,10 +10,12 @@
 
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
-/*Ceci est un generateur d'onde, autrement dit, un oscillateur capable de generer 
-un saw ou un square ou un autre type d'onde qui se trouve dans waves
-Il doit connaître le type d'onde à générer, la fréquence, la phase le nombre de sampleFrames, le sampleRate
-*/
+
+/** A wave generator, an oscillator able to generate various types of waves
+(although in this case it can just play saw waves).
+It has  to know the type of wave to generate, the frequency, the phase,
+the sampleFrames number, the sampleRate. */
+
 class WaveGenerator
 {
 public:
@@ -26,14 +28,28 @@ public:
     float amplitude = 1.0);
     
 	~WaveGenerator();
-
+	
+ /** Renders the next block of data.
+    The output audio data must be added to the current contents of the buffer provided. 
+    Only the region of the buffer between startSample and (startSample + numSamples) 
+    should be altered by this method. */
 	void getWave(AudioSampleBuffer& outputBuffer, int startSample, int numSamples);
-	void setFrequency(float newFrequency);//used to change the frequency
-	void setWaveType(int newWaveType);//used to change the waveType
-    void setPan(float newPan);//used to change the pan
-    void setVolume(float newVolume);//used to change the volume
+
+	/** Sets the oscillator frequency in Hertz. */
+	void setFrequency(float newFrequency);
+	
+	/** Sets the type of wave used by the oscillator. */
+	void setWaveType(int newWaveType);
+	
+	/**Sets the pan of the oscillator. Value between 0 and 1. */
+    void setPan(float newPan);
+    
+    /**Sets the oscillator amplitude, from 0 to 1. */
+    void setVolume(float newVolume);
+    
+    /** Sets the oscillator phase value, between 0 and 1. */
     void setPhase(float newPhase);
-    //void setPhase(float newPhase);//sets phase value, between 0 - 1
+
     //void setPulseWidth
 
 private:

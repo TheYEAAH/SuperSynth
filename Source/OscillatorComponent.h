@@ -12,7 +12,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
+/** This class is the component which is made to act as the GUI of a SuperWaveGenerator.
+It is added as a subComponent of the SuperSynthAudioProcessorEditor.
 */
 class OscillatorComponent : public Component
 {
@@ -29,6 +30,7 @@ public:
     typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
     typedef AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
     
+    /** Creates an OscillatorComponent. It is an editor specially made for the SuperWaveGenerator Class. */
     OscillatorComponent(AudioProcessorValueTreeState& vts);    
     ~OscillatorComponent();
 
@@ -39,7 +41,7 @@ private:
     /*amp, wave, pitch, voices, detune
   pan, phase, fine, pw,     Spread*/
   
-    //GroupComponent oscillatorGroup;
+    GroupComponent oscillatorGroup;
     
     Slider amplitudeSlider;
     Slider panSlider;

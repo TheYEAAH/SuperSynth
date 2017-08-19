@@ -8,7 +8,6 @@
   ==============================================================================
 */
 
-#include "PluginProcessor.h"
 #include "PluginEditor.h"
 
 
@@ -18,7 +17,7 @@ SuperSynthAudioProcessorEditor::SuperSynthAudioProcessorEditor (AudioProcessor& 
 {
 /*amp, wave, pitch, voices, detune
   pan, phase, fine, pw,     Spread*/
-    
+    setLookAndFeel (&otherLookAndFeel);
 
     oscillator = new OscillatorComponent(valueTreeState);
 
@@ -26,9 +25,7 @@ SuperSynthAudioProcessorEditor::SuperSynthAudioProcessorEditor (AudioProcessor& 
     
     filter = new FilterComponent();
     //addAndMakeVisible (filter);
-
-    
-    setSize (oscillator->getWidth() + filter->getWidth(),oscillator->getHeight() + oscillator->getHeight());
+        setSize (oscillator->getWidth(),oscillator->getHeight());
 }
 
 SuperSynthAudioProcessorEditor::~SuperSynthAudioProcessorEditor()

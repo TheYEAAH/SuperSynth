@@ -9,7 +9,6 @@
 */
 
 #include "SineWaveVoice.h"
-#include "../JuceLibraryCode/JuceHeader.h"
 
 SineWaveVoice::SineWaveVoice(AudioProcessorValueTreeState& parameters, double currentAngle, double angleDelta, double tailOff)
 : currentAngle(currentAngle), angleDelta(angleDelta), tailOff(tailOff), parameters(parameters)
@@ -106,7 +105,6 @@ void SineWaveVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startS
         }
         else
         {
-            
             oscillator->getWave(outputBuffer, startSample, numSamples);
             leftFilter.processSamples(outputBuffer.getWritePointer(0),numSamples);//left channel
             rightFilter.processSamples(outputBuffer.getWritePointer(1),numSamples);//right channel
