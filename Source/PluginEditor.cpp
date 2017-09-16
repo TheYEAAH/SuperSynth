@@ -18,20 +18,21 @@ SuperSynthAudioProcessorEditor::SuperSynthAudioProcessorEditor (AudioProcessor& 
 /*amp, wave, pitch, voices, detune
   pan, phase, fine, pw,     Spread*/
     setLookAndFeel (&otherLookAndFeel);
-
-    oscillator = new OscillatorComponent(valueTreeState);
-
-    addAndMakeVisible (oscillator);
     
-    filter = new FilterComponent();
-    //addAndMakeVisible (filter);
-        setSize (oscillator->getWidth(),oscillator->getHeight());
+    addAndMakeVisible (modulationMatrix = new ModulationMatrixComponent());
+
+    addAndMakeVisible (oscillator = new OscillatorComponent(valueTreeState));
+
+    addAndMakeVisible (filter = new FilterComponent());
+    
+    setSize (oscillator->getWidth()*4 + modulationMatrix->getWidth(),oscillator->getHeight() + filter->getHeight());
 }
 
 SuperSynthAudioProcessorEditor::~SuperSynthAudioProcessorEditor()
 {
-    delete oscillator;
-    delete filter;
+    oscillator = nullptr;
+    filter = nullptr;
+    modulationMatrix = nullptr;
 }
 
 //==============================================================================
@@ -51,16 +52,16 @@ void SuperSynthAudioProcessorEditor::resized()
     // subcomponents in your editor..
     // sets the position and size of the slider with arguments (x, y, width, height)
 
-        Rectangle<int> r = getLocalBounds();
+    Rectangle<int> r = getLocalBounds();
+    Rectangle<int> processorsSection = r.removeFromLeft(oscillator->getWidth());
         
-        {
-            oscillator->setBounds (r);
-            //filter->setBounds (r);
-           
-        }
-
-        
-
+    {
+    oscillator->setBounds(processorsSection.removeFromTop(oscillator->getHeight()));
+    filter->setBounds(processorsSection.removeFromLeft(filter->getWidth()));
+    modulationMatrix->setBounds(r.removeFromRight(modulationMatrix->getWidth()));
+    
+    
+    }
 }
 /*
 void SuperSynthAudioProcessorEditor::sliderValueChanged (Slider* slider)

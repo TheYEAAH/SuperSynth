@@ -343,9 +343,14 @@ SliderComponent::SliderComponent ()
     slider3->setRange (0, 10, 0);
     slider3->setSliderStyle (Slider::RotaryVerticalDrag);
     slider3->setTextBoxStyle (Slider::NoTextBox, true, 60, 12);
-    slider3->setColour (Slider::trackColourId, Colour (0xff5e6e75));
-    slider3->setColour (Slider::textBoxHighlightColourId, Colour (0xa41111ee));
-    slider3->setColour (Slider::textBoxOutlineColourId, Colour (0xb2b92828));
+    slider3->setColour (Slider::backgroundColourId, Colour (0xff206181));
+    slider3->setColour (Slider::trackColourId, Colour (0xff009bdd));
+    slider3->setColour (Slider::rotarySliderFillColourId, Colour (0xff958b65));
+    slider3->setColour (Slider::rotarySliderOutlineColourId, Colour (0xff4c575c));
+    slider3->setColour (Slider::textBoxTextColourId, Colour (0xff9e3d3d));
+    slider3->setColour (Slider::textBoxBackgroundColourId, Colour (0xff346c88));
+    slider3->setColour (Slider::textBoxHighlightColourId, Colour (0xa43333ab));
+    slider3->setColour (Slider::textBoxOutlineColourId, Colour (0xb2803131));
     slider3->addListener (this);
 
     addAndMakeVisible (slider4 = new Slider ("new slider"));
@@ -1116,11 +1121,12 @@ BEGIN_JUCER_METADATA
           textBoxPos="NoTextBox" textBoxEditable="0" textBoxWidth="60"
           textBoxHeight="12" skewFactor="1" needsCallback="1"/>
   <SLIDER name="new slider" id="4a35b4c550640ca4" memberName="slider3"
-          virtualName="" explicitFocusOrder="0" pos="64 288 64 54" trackcol="ff5e6e75"
-          textboxhighlight="a41111ee" textboxoutline="b2b92828" min="0"
-          max="10" int="0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
-          textBoxEditable="0" textBoxWidth="60" textBoxHeight="12" skewFactor="1"
-          needsCallback="1"/>
+          virtualName="" explicitFocusOrder="0" pos="64 288 64 54" bkgcol="ff206181"
+          trackcol="ff009bdd" rotarysliderfill="ff958b65" rotaryslideroutline="ff4c575c"
+          textboxtext="ff9e3d3d" textboxbkgd="ff346c88" textboxhighlight="a43333ab"
+          textboxoutline="b2803131" min="0" max="10" int="0" style="RotaryVerticalDrag"
+          textBoxPos="NoTextBox" textBoxEditable="0" textBoxWidth="60"
+          textBoxHeight="12" skewFactor="1" needsCallback="1"/>
   <SLIDER name="new slider" id="5d46a958bd047fe8" memberName="slider4"
           virtualName="" explicitFocusOrder="0" pos="69 183 30 30" textboxhighlight="a41111ee"
           textboxoutline="b2b92828" min="0" max="10" int="0" style="RotaryVerticalDrag"

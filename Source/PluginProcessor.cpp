@@ -93,8 +93,8 @@ SuperSynthAudioProcessor::SuperSynthAudioProcessor()
     parameters.createAndAddParameter ("waveType",       // parameter ID
                                   "waveType",       // parameter name
                                   String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.5f,         // default value
+                                  NormalisableRange<float> (0.0f, 3.0f, 1.0f),    // range
+                                  1.f,         // default value
                                   nullptr,
                                   nullptr);
                                   
