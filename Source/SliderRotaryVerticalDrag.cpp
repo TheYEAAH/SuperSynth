@@ -20,7 +20,7 @@ SliderRotaryVerticalDrag::SliderRotaryVerticalDrag()
     sliderRotaryVerticalDrag.setSliderStyle (Slider::RotaryVerticalDrag);
     sliderRotaryVerticalDrag.setRange (0.0, 127.0, 1.0);
     sliderRotaryVerticalDrag.setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    sliderRotaryVerticalDrag.setPopupDisplayEnabled (true, this);
+    sliderRotaryVerticalDrag.setPopupDisplayEnabled (true, true, this, 1000);
     sliderRotaryVerticalDrag.setValue (1.0);
     addAndMakeVisible (&sliderRotaryVerticalDrag);
 
