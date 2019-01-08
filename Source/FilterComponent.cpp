@@ -46,7 +46,7 @@ FilterComponent::FilterComponent()
     cutoff->setSliderStyle (Slider::RotaryVerticalDrag);
     cutoff->setRange (0.0, 127.0, 1.0);
     cutoff->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    cutoff->setPopupDisplayEnabled (true, this);
+    cutoff->setPopupDisplayEnabled (true, true,this,1000);
     cutoff->setTextValueSuffix (" Hz");
     cutoff->setValue (1.0);
     cutoff->setComponentID("cutoff");
@@ -65,7 +65,7 @@ FilterComponent::FilterComponent()
     resonance->setSliderStyle (Slider::RotaryVerticalDrag);
     resonance->setRange (0.0, 127.0, 1.0);
     resonance->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    resonance->setPopupDisplayEnabled (true, this);
+    resonance->setPopupDisplayEnabled (true, true,this,1000);
     resonance->setTextValueSuffix (" Hz");
     resonance->setValue (1.0);
     resonance->setComponentID("resonance");
