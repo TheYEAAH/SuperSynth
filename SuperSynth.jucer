@@ -23,10 +23,6 @@
               file="Source/OscillatorComponent.cpp"/>
         <FILE id="VfdECP" name="OscillatorComponent.h" compile="0" resource="0"
               file="Source/OscillatorComponent.h"/>
-        <FILE id="BRswGx" name="SliderComponent.cpp" compile="1" resource="0"
-              file="Source/SliderComponent.cpp"/>
-        <FILE id="qmxBo1" name="SliderComponent.h" compile="0" resource="0"
-              file="Source/SliderComponent.h"/>
         <FILE id="XdEWMu" name="SliderRotaryVerticalDrag.cpp" compile="1" resource="0"
               file="Source/SliderRotaryVerticalDrag.cpp"/>
         <FILE id="iVc2az" name="SliderRotaryVerticalDrag.h" compile="0" resource="0"
