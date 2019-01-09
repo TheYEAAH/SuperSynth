@@ -25,7 +25,7 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
     comboBox->addItem (TRANS("Env 2"), 2);
     comboBox->addItem (TRANS("LFO 1"), 3);
     comboBox->addItem (TRANS("LFO 2"), 4);
-    comboBox->addListener (this);
+    //comboBox->addListener (this);
 
     addAndMakeVisible (comboBox2 = new ComboBox ("new combo box"));
     comboBox2->setTooltip (TRANS("Select a target"));
@@ -34,7 +34,7 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
     comboBox2->setTextWhenNothingSelected (String());
     comboBox2->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     comboBox2->addItem (TRANS("Filter1:cutoff"), 1);
-    comboBox2->addListener (this);
+    //comboBox2->addListener (this);
 
     addAndMakeVisible (label = new Label ("new label",
                                           TRANS("Sources")));
@@ -122,17 +122,4 @@ void ModulationMatrixComponent::resized()
 
 }
 
-void ModulationMatrixComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
-{
- 
 
-    if (comboBoxThatHasChanged == comboBox)
-    {
-
-    }
-    else if (comboBoxThatHasChanged == comboBox2)
-    {
-
-    }
-
-}

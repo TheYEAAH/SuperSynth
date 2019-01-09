@@ -5,8 +5,7 @@
 
 
 
-class ModulationMatrixComponent  : public Component,
-                                   public ComboBoxListener
+class ModulationMatrixComponent  : public Component
 {
 public:
     //==============================================================================
@@ -26,9 +25,11 @@ public:
         toLabelWidth       = 23//label with "->" text
     };
 
-    void paint (Graphics& g) override;
+    void paint (Graphics&) override;
     void resized() override;
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
+    
+
+
 
 
 
