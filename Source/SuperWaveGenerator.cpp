@@ -14,9 +14,11 @@
 SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters, float frequency)
 : parameters(parameters), frequency(frequency)
 {   
-    /*parameters.addParameterListener	("frequency", this);
+    
     parameters.addParameterListener	("waveType", this);
 
+    /*
+    parameters.addParameterListener	("frequency", this);
     parameters.addParameterListener	("phase", this);
     parameters.addParameterListener	("pulseWidth", this);*/
     parameters.addParameterListener	("retrig", this);
@@ -35,6 +37,7 @@ SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters,
     int voiceNumber = 8;//(int) *parameters.getRawParameterValue ("voiceNumber");
     float detune = *parameters.getRawParameterValue ("detune");
     float spread = *parameters.getRawParameterValue ("spread");
+    
     bool retrig = (bool) *parameters.getRawParameterValue ("retrig");
     if(voiceNumber & 1)// voiceNumber est impair
     {
@@ -45,7 +48,7 @@ SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters,
 
             if(i & 1)//oscillateur impair
             {
-                oscillators[i] = new WaveGenerator(frequency * pow(2,2 * detune/(12*(voiceNumber-(i/2)))));//frequence oscillateur=frequency * 2^(detune amount/12) avec detune amount entre 0 et 1
+                oscillators[i] = new WaveGenerator(frequency * pow(2,2 * detune/(12*(voiceNumber-(i/2)))));//frequence oscillateur=frequency * 2^(detune amount/12) avec detune amount entre 0 et 1    
             }
             else
             {
@@ -60,12 +63,12 @@ SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters,
             //oscillators[i] = new WaveGenerator(frequency - pow(-1,i)* n*(frequency*pow(2,detune/12)-frequency));
 
             if(i & 1)//oscillateur impair
-            {
-                oscillators[i] = new WaveGenerator(frequency * pow(2,2 * detune / (12*(voiceNumber-(i/2)))));//frequence oscillateur=frequency * 2^(detune amount/12) avec detune amount entre 0 et 1
+            {   //frequence oscillateur=frequency * 2^(detune amount/12) avec detune amount entre 0 et 1
+                oscillators[i] = new WaveGenerator(frequency * pow(2,2 * detune / (12*(voiceNumber-(i/2)))));
             }
             else
             {
-                oscillators[i] = new WaveGenerator(frequency * pow(2,-2 * detune/(12*(voiceNumber-((i-1)/2)))));
+                oscillators[i] = new WaveGenerator(frequency * pow(2,-2 * detune/(12*(voiceNumber-((i-1)/2)))));   
             }
         }
     }
@@ -77,6 +80,7 @@ SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters,
         }
     }
     //on vérifie le spread
+    setWaveType((int) *parameters.getRawParameterValue ("waveType"));
     setSpread(spread);
     setDetune(detune);
     setAmplitude(*parameters.getRawParameterValue ("amplitude"));
@@ -96,10 +100,9 @@ SuperWaveGenerator::~SuperWaveGenerator()
     }
 
 /*
-    parameters.removeParameterListener	("waveType", this);
-    
     parameters.removeParameterListener	("phase", this);
     parameters.removeParameterListener	("pulseWidth", this);*/
+    parameters.removeParameterListener	("waveType", this);
     parameters.removeParameterListener	("retrig", this);
     parameters.removeParameterListener	("voiceNumber", this);
     parameters.removeParameterListener	("detune", this);
@@ -127,7 +130,7 @@ void SuperWaveGenerator::setAmplitude(float newAmplitude)
 {
     for (int i(0); i < (int) *parameters.getRawParameterValue ("voiceNumber"); i++)
     {
-        oscillators[i]->setVolume(newAmplitude);
+        oscillators[i]->setAmplitude(newAmplitude);
     }
 }
 
@@ -240,9 +243,24 @@ void SuperWaveGenerator::setSpread(float newSpread)
     }
 }
 
+void SuperWaveGenerator::setWaveType(int newWaveType)
+{
+    WaveGenerator::WaveGeneratorWaveType waveType = static_cast<WaveGenerator::WaveGeneratorWaveType>(newWaveType);
+    
+    int i = 8;//(int) *parameters.getRawParameterValue ("voiceNumber");
+    while(--i >= 0)
+    {
+        //oscillators[i]->setWaveType(WaveGenerator::WAVEGENERATOR_WAVETYPE_SINE);
+        oscillators[i]->setWaveType(waveType);
+    }
+}
 
 void SuperWaveGenerator::parameterChanged(const String &parameterID, float newValue)
 {
+    if (parameterID == "waveType")
+    {
+        setWaveType((int) newValue);
+    }
     if (parameterID == "detune")
     {
         setDetune(newValue);

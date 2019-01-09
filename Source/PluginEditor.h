@@ -13,7 +13,7 @@
 #include "OscillatorComponent.h"
 #include "FilterComponent.h"
 #include "OtherLookAndFeel.h"
-
+#include "ModulationMatrixComponent.h"
 //==============================================================================
 /** Class that acts as the GUI for the SimpleSuperSynthAudioProcessor.
 */
@@ -49,7 +49,8 @@ public:
 private:
     OtherLookAndFeel otherLookAndFeel;
     AudioProcessorValueTreeState& valueTreeState; 
-    OscillatorComponent * oscillator;
-    FilterComponent * filter;
+    ScopedPointer<OscillatorComponent> oscillator;
+    ScopedPointer<ModulationMatrixComponent> modulationMatrix;
+    ScopedPointer<FilterComponent> filter;
 
 };

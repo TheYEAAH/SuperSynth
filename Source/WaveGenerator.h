@@ -19,9 +19,17 @@ the sampleFrames number, the sampleRate. */
 class WaveGenerator
 {
 public:
+    enum WaveGeneratorWaveType {
+        WAVEGENERATOR_WAVETYPE_SINE = 0,
+        WAVEGENERATOR_WAVETYPE_SAW,
+        WAVEGENERATOR_WAVETYPE_SQUARE,
+        WAVEGENERATOR_WAVETYPE_TRIANGLE,
+        kNumWaveGeneratorWaveTypes
+    };
+    
     WaveGenerator(
     float frequency=440.0,
-    int waveType = 2,
+    WaveGeneratorWaveType waveType = WAVEGENERATOR_WAVETYPE_SAW,
     float phase = 0.0f,
     float pulseWidth = 0.0,
     float pan = 0.5,
@@ -39,26 +47,34 @@ public:
 	void setFrequency(float newFrequency);
 	
 	/** Sets the type of wave used by the oscillator. */
-	void setWaveType(int newWaveType);
+	void setWaveType(WaveGeneratorWaveType newWaveType);
 	
 	/**Sets the pan of the oscillator. Value between 0 and 1. */
     void setPan(float newPan);
     
     /**Sets the oscillator amplitude, from 0 to 1. */
-    void setVolume(float newVolume);
+    void setAmplitude(float newAmplitude);
     
     /** Sets the oscillator phase value, between 0 and 1. */
     void setPhase(float newPhase);
 
     //void setPulseWidth
-
+    
 private:
 	float frequency;
-    int waveType;//waveType 1=sineWave, 2=sawtoothWave, 3=squareWave, 4=whiteNoise
-    float phase; //position in the wave phase ratio between 0-1
+    WaveGeneratorWaveType waveType;
+    double phase; //position in the wave phase ratio between 0-1
     float pulseWidth;//ratio between 0-1
-    float sampleRate;
+    double sampleRate;
     float pan;//ratio between 0-1
-    float volume;//volume
+    float amplitude;
+    const double mPI;//(2*acos(0.0));
+    const double twoPI;//(2 * mPI);
+    double phaseIncrement;
+    void updatePhaseIncrement();
+    
+    /* For polybleps*/
+    double lastOutput;
+    double poly_blep(double t);//method
 };
 

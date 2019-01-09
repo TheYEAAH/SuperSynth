@@ -11,6 +11,7 @@
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "wavegenerator.h"
+//#include "PolyBLEPOscillator.h"
 #include "math.h"
 
 /** A superwave generator, a group of oscillators that creates a superwave together.
@@ -80,6 +81,9 @@ public:
     /** Sets the amplitude (between 0 and 1). */
     void setAmplitude(float newAmplitude);
     
+    /** Sets the wave type of the superwave generators. @See WaveGenerator  */
+    void setWaveType(int newWaveType);
+    
     /** Implements the AudioProcessorValueTreeState::Listener method.
     This callback method is called by the AudioProcessorValueTreeState when a parameter changes.
     @See AudioProcessorValueTreeState::Listener
@@ -87,15 +91,6 @@ public:
     void parameterChanged(const String &parameterID, float newValue) override;
     //void setPhase(float newPhase);//sets phase value, between 0 - 1
     //void setPulseWidth
-    /*    enum WaveType
-    {
-        SAW,
-        PULSE,
-        TRIANGLE,
-        SIN,
-        NOISE
-    };*/
-
 private:
     WaveGenerator * oscillators[8];
     AudioProcessorValueTreeState& parameters;
