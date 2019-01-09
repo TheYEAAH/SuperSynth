@@ -15,18 +15,29 @@
   <MAINGROUP id="E0hLrL" name="SimpleSuperSynth">
     <GROUP id="{2E572B2F-BF6C-772C-805C-DC939BDAAD62}" name="Source">
       <GROUP id="{EB229969-112F-64F7-341C-480AAF7DC0E5}" name="Components">
+        <FILE id="PI42Ds" name="ADSRComponent.cpp" compile="1" resource="0"
+              file="Source/ADSRComponent.cpp"/>
+        <FILE id="x1RW84" name="ADSRComponent.h" compile="0" resource="0" file="Source/ADSRComponent.h"/>
         <FILE id="O7Z1ow" name="FilterComponent.cpp" compile="1" resource="0"
               file="Source/FilterComponent.cpp"/>
         <FILE id="FrZcPI" name="FilterComponent.h" compile="0" resource="0"
               file="Source/FilterComponent.h"/>
+        <FILE id="StwyLr" name="ModulationMatrix.cpp" compile="1" resource="0"
+              file="Source/ModulationMatrix.cpp"/>
+        <FILE id="IjjOeR" name="ModulationMatrix.h" compile="0" resource="0"
+              file="Source/ModulationMatrix.h"/>
+        <FILE id="tg2EtM" name="ModulationMatrixComponent.cpp" compile="1"
+              resource="0" file="Source/ModulationMatrixComponent.cpp"/>
+        <FILE id="dzFnpV" name="ModulationMatrixComponent.h" compile="0" resource="0"
+              file="Source/ModulationMatrixComponent.h"/>
         <FILE id="y2p9Lm" name="OscillatorComponent.cpp" compile="1" resource="0"
               file="Source/OscillatorComponent.cpp"/>
         <FILE id="VfdECP" name="OscillatorComponent.h" compile="0" resource="0"
               file="Source/OscillatorComponent.h"/>
-        <FILE id="XdEWMu" name="SliderRotaryVerticalDrag.cpp" compile="1" resource="0"
-              file="Source/SliderRotaryVerticalDrag.cpp"/>
-        <FILE id="iVc2az" name="SliderRotaryVerticalDrag.h" compile="0" resource="0"
-              file="Source/SliderRotaryVerticalDrag.h"/>
+        <FILE id="BRswGx" name="SliderComponent.cpp" compile="1" resource="0"
+              file="Source/SliderComponent.cpp"/>
+        <FILE id="qmxBo1" name="SliderComponent.h" compile="0" resource="0"
+              file="Source/SliderComponent.h"/>
       </GROUP>
       <FILE id="ifFeKl" name="OtherLookAndFeel.cpp" compile="1" resource="0"
             file="Source/OtherLookAndFeel.cpp"/>
@@ -48,6 +59,9 @@
       <FILE id="YDPXTK" name="SineWaveVoice.cpp" compile="1" resource="0"
             file="Source/SineWaveVoice.cpp"/>
       <FILE id="WxnXqN" name="SineWaveVoice.h" compile="0" resource="0" file="Source/SineWaveVoice.h"/>
+      <FILE id="r9YoQo" name="ADSRGenerator.cpp" compile="1" resource="0"
+            file="Source/ADSRGenerator.cpp"/>
+      <FILE id="tjPuuj" name="ADSRGenerator.h" compile="0" resource="0" file="Source/ADSRGenerator.h"/>
       <FILE id="mMGEnx" name="SuperWaveGenerator.cpp" compile="1" resource="0"
             file="Source/SuperWaveGenerator.cpp"/>
       <FILE id="XPUkI1" name="SuperWaveGenerator.h" compile="0" resource="0"
@@ -56,6 +70,12 @@
             file="Source/WaveGenerator.cpp"/>
       <FILE id="ybfnjn" name="WaveGenerator.h" compile="0" resource="0" file="Source/WaveGenerator.h"/>
     </GROUP>
+    <FILE id="YcwMi2" name="Oscillator.cpp" compile="1" resource="0" file="Source/Oscillator.cpp"/>
+    <FILE id="DI3QBG" name="Oscillator.h" compile="0" resource="0" file="Source/Oscillator.h"/>
+    <FILE id="D4Npve" name="PolyBLEPOscillator.cpp" compile="1" resource="0"
+          file="Source/PolyBLEPOscillator.cpp"/>
+    <FILE id="Ov3VIz" name="PolyBLEPOscillator.h" compile="0" resource="0"
+          file="Source/PolyBLEPOscillator.h"/>
   </MAINGROUP>
   <EXPORTFORMATS>
     <VS2017 targetFolder="Builds/VisualStudio2017">
