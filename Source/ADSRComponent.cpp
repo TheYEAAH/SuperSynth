@@ -36,7 +36,7 @@ ADSRComponent::ADSRComponent()
     attack->setSliderStyle (Slider::RotaryVerticalDrag);
     attack->setRange (0.0, 127.0, 1.0);
     attack->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    attack->setPopupDisplayEnabled (true, this);
+    attack->setPopupDisplayEnabled (true, true, this, 1000);
     attack->setTextValueSuffix (" s");
     attack->setValue (1.0);
     attack->setComponentID("attack");
@@ -55,7 +55,7 @@ ADSRComponent::ADSRComponent()
     decay->setSliderStyle (Slider::RotaryVerticalDrag);
     decay->setRange (0.0, 127.0, 1.0);
     decay->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    decay->setPopupDisplayEnabled (true, this);
+    decay->setPopupDisplayEnabled (true, true, this, 1000);
     decay->setTextValueSuffix (" s");
     decay->setValue (1.0);
     decay->setComponentID("decay");
@@ -74,7 +74,7 @@ ADSRComponent::ADSRComponent()
     sustain->setSliderStyle (Slider::RotaryVerticalDrag);
     sustain->setRange (0.0, 127.0, 1.0);
     sustain->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    sustain->setPopupDisplayEnabled (true, this);
+    sustain->setPopupDisplayEnabled (true, true, this, 1000);
     sustain->setTextValueSuffix (" s");
     sustain->setValue (1.0);
     sustain->setComponentID("sustain");
@@ -93,7 +93,7 @@ ADSRComponent::ADSRComponent()
     release->setSliderStyle (Slider::RotaryVerticalDrag);
     release->setRange (0.0, 127.0, 1.0);
     release->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    release->setPopupDisplayEnabled (true, this);
+    release->setPopupDisplayEnabled (true, true, this, 1000);
     release->setTextValueSuffix (" s");
     release->setValue (1.0);
     release->setComponentID("release");
