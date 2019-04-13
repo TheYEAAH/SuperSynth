@@ -8,8 +8,8 @@
   ==============================================================================
 */
 
-#ifndef MODULATIONMATRIX_H_INCLUDED
-#define MODULATIONMATRIX_H_INCLUDED
+#pragma once
+#include "../JuceLibraryCode/JuceHeader.h"
 
 /**
 A modulation matrix that knows :
@@ -30,7 +30,50 @@ A chaque buffer, la device demande le modAmount et l'adresse du buffer et du mod
 Lorsque le paramètre n'est plus modulé la modMatrix prévient la device
 */
 
-//VOIR AUDIOPROCESSOR BUS?
+class ModulationMatrix : public AudioProcessorValueTreeState::Listener
+{
+public:
+    
+    ModulationMatrix(
+    /*Processor processorsList,
+    Modulation modulations*/
+    );
+    
+	~ModulationMatrix();
+	
+ /** Renders the next block of data.
+    The output audio data must be added to the current contents of the buffer provided. 
+    Only the region of the buffer between startSample and (startSample + numSamples) 
+    should be altered by this method. */
+	void renderNextBlock(AudioSampleBuffer& outputBuffer, int startSample, int numSamples);
 
-
-#endif  // MODULATIONMATRIX_H_INCLUDED
+	/** Adds a new processor. */
+	void addProcessor(Processor newProcessor);
+	
+	
+	/**Sets the modulation target. */
+    void setTarget(Modulation modulation, parameter processorParameterToBeModulated);
+    
+    	
+	/**Sets the modulation source */
+    void setSource(Modulation modulation, Processor source);
+    
+	/**Sets the modulation amplitude */
+    void setModulationAmplitude(Modulation modulation, float newAmplitude);
+    
+    /**Sets the modulation type (multiply or add). 0 for multiply, 1 for add.*/
+    void setModulationtType(Modulation modulation, bool modulationType);
+    
+    /** Implements the AudioProcessorValueTreeState::Listener method.
+    This callback method is called by the AudioProcessorValueTreeState when a parameter changes.
+    @See AudioProcessorValueTreeState::Listener
+    */
+    void parameterChanged(const String &parameterID, float newValue) override;
+    
+private:
+    /** Adds a modulation. */
+	void addModulation();
+	Modulation * modulations[8];
+	Processor * processors[8];
+    double sampleRate;
+};

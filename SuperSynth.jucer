@@ -22,10 +22,6 @@
               file="Source/FilterComponent.cpp"/>
         <FILE id="FrZcPI" name="FilterComponent.h" compile="0" resource="0"
               file="Source/FilterComponent.h"/>
-        <FILE id="StwyLr" name="ModulationMatrix.cpp" compile="1" resource="0"
-              file="Source/ModulationMatrix.cpp"/>
-        <FILE id="IjjOeR" name="ModulationMatrix.h" compile="0" resource="0"
-              file="Source/ModulationMatrix.h"/>
         <FILE id="tg2EtM" name="ModulationMatrixComponent.cpp" compile="1"
               resource="0" file="Source/ModulationMatrixComponent.cpp"/>
         <FILE id="dzFnpV" name="ModulationMatrixComponent.h" compile="0" resource="0"
@@ -35,6 +31,10 @@
         <FILE id="VfdECP" name="OscillatorComponent.h" compile="0" resource="0"
               file="Source/OscillatorComponent.h"/>
       </GROUP>
+      <FILE id="StwyLr" name="ModulationMatrix.cpp" compile="1" resource="0"
+            file="Source/ModulationMatrix.cpp"/>
+      <FILE id="IjjOeR" name="ModulationMatrix.h" compile="0" resource="0"
+            file="Source/ModulationMatrix.h"/>
       <FILE id="ifFeKl" name="OtherLookAndFeel.cpp" compile="1" resource="0"
             file="Source/OtherLookAndFeel.cpp"/>
       <FILE id="TeQuCl" name="OtherLookAndFeel.h" compile="0" resource="0"
@@ -55,9 +55,6 @@
       <FILE id="YDPXTK" name="SineWaveVoice.cpp" compile="1" resource="0"
             file="Source/SineWaveVoice.cpp"/>
       <FILE id="WxnXqN" name="SineWaveVoice.h" compile="0" resource="0" file="Source/SineWaveVoice.h"/>
-      <FILE id="r9YoQo" name="ADSRGenerator.cpp" compile="1" resource="0"
-            file="Source/ADSRGenerator.cpp"/>
-      <FILE id="tjPuuj" name="ADSRGenerator.h" compile="0" resource="0" file="Source/ADSRGenerator.h"/>
       <FILE id="mMGEnx" name="SuperWaveGenerator.cpp" compile="1" resource="0"
             file="Source/SuperWaveGenerator.cpp"/>
       <FILE id="XPUkI1" name="SuperWaveGenerator.h" compile="0" resource="0"
