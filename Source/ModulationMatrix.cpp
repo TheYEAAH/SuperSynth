@@ -12,7 +12,7 @@
 
 //Constructeur par défault et surchargé
 ModulationMatrix::ModulationMatrix(/*processorList, modulations*/)
-: /*parameters(parameters), frequency(frequency)*/
+//: /*parameters(parameters), frequency(frequency)*/
 {   
     /*
     parameters.addParameterListener	("frequency", this);
@@ -39,32 +39,32 @@ void ModulationMatrix::renderNextBlock(AudioSampleBuffer& outputBuffer, int star
 {
 }
 
-void ModulationMatrix::addProcessor(Processor newProcessor);
+/*void ModulationMatrix::addProcessor(AudioProcessor newProcessor)
 {
     /* adds a new processor to the list, checks if it can be a source or has targets for modulations and add them to the list.*/
-}
+//}
 
-void ModulationMatrix::setTarget(Modulation modulation, parameter processorParameterToBeModulated)
+/*void ModulationMatrix::setTarget(Modulation modulation, parameter processorParameterToBeModulated)
 {    
     /*sets the modulation's target*/
-}
+//}
     	
-void ModulationMatrix::setSource(Modulation modulation, Processor source)
+/*void ModulationMatrix::setSource(Modulation modulation, Processor source)
 {
         /*sets the modulation's source*/
 
-}
+//}
 
-void ModulationMatrix::setModulationAmplitude(Modulation modulation, float newAmplitude)
+/*void ModulationMatrix::setModulationAmplitude(Modulation modulation, float newAmplitude)
 {
     /*sets the modulation's amplitude*/
 
-}
-void ModulationMatrix::setModulationtType(Modulation modulation, bool modulationType)
+//}
+/* ModulationMatrix::setModulationtType(Modulation modulation, bool modulationType)
 {
     /*sets the modulation type*/
 
-}
+//}
 
 void ModulationMatrix::parameterChanged(const String &parameterID, float newValue)
 {

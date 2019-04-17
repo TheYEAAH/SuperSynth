@@ -69,6 +69,9 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
     label4->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     setSize (sourceColumnWidth +toLabelWidth + targetColumnWidth + toggleButtonWidth + paramSliderWidth, 600);
+    
+    /*static Identifier myNodeType ("MyNode"); // pre-create an Identifier
+    ValueTree myNode (myNodeType);           // This is a valid node, of type "MyNode"*/
 
 }
 

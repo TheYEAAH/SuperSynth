@@ -45,24 +45,24 @@ public:
     The output audio data must be added to the current contents of the buffer provided. 
     Only the region of the buffer between startSample and (startSample + numSamples) 
     should be altered by this method. */
-	void renderNextBlock(AudioSampleBuffer& outputBuffer, int startSample, int numSamples);
+	void renderNextBlock(AudioSampleBuffer& outputBuffer, int startSample, int numSamples) const;
 
 	/** Adds a new processor. */
-	void addProcessor(Processor newProcessor);
+	//void addProcessor(AudioProcessor newProcessor);
 	
 	
 	/**Sets the modulation target. */
-    void setTarget(Modulation modulation, parameter processorParameterToBeModulated);
+    //void setTarget(Modulation modulation, parameter processorParameterToBeModulated);
     
     	
 	/**Sets the modulation source */
-    void setSource(Modulation modulation, Processor source);
+   // void setSource(Modulation modulation, Processor source);
     
 	/**Sets the modulation amplitude */
-    void setModulationAmplitude(Modulation modulation, float newAmplitude);
+   // void setModulationAmplitude(Modulation modulation, float newAmplitude);
     
     /**Sets the modulation type (multiply or add). 0 for multiply, 1 for add.*/
-    void setModulationtType(Modulation modulation, bool modulationType);
+    //void setModulationtType(Modulation modulation, bool modulationType);
     
     /** Implements the AudioProcessorValueTreeState::Listener method.
     This callback method is called by the AudioProcessorValueTreeState when a parameter changes.
@@ -73,7 +73,7 @@ public:
 private:
     /** Adds a modulation. */
 	void addModulation();
-	Modulation * modulations[8];
-	Processor * processors[8];
+	//Modulation * modulations[8];
+	//Processor * processors[8];
     double sampleRate;
 };
