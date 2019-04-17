@@ -39,7 +39,7 @@ WaveGenerator::~WaveGenerator()
 {
 }
 
-void WaveGenerator::getWave(AudioSampleBuffer& outputBuffer, int startSample, int numSamples) //il faut que l'oscillateur envoie un pointeur vers une valeur qui sera modifiée par la fonction
+void WaveGenerator::renderNextBlock(AudioSampleBuffer& outputBuffer, int startSample, int numSamples) //il faut que l'oscillateur envoie un pointeur vers une valeur qui sera modifiée par la fonction
 {
     double tempVar;//variable temporaire qui permet de faire une fois un calcul qui prend beaucoup de ressources
     
