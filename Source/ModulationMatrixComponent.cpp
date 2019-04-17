@@ -70,9 +70,20 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
 
     setSize (sourceColumnWidth +toLabelWidth + targetColumnWidth + toggleButtonWidth + paramSliderWidth, 600);
     
-    /*static Identifier myNodeType ("MyNode"); // pre-create an Identifier
-    ValueTree myNode (myNodeType);           // This is a valid node, of type "MyNode"*/
-
+    //Creating nodes
+    static Identifier audioProcessorType ("AudioProcessorType"); // pre-create an Identifier
+    ValueTree audioProcessorNode (audioProcessorType);           // This is a valid node, of type "AudioProcessorType"*/
+    static Identifier modulationSourcesType ("ModulationSourcesType");
+    ValueTree modulationSourcesNode (modulationSourcesType);
+    static Identifier modulationTargetsType ("ModulationTargetsType");
+    ValueTree modulationTargetsNode (modulationTargetsType);
+    
+    //Setting a property to a node
+    static Identifier propertyName ("name");
+    audioProcessorNode.setProperty (propertyName, "audioProcessorName", nullptr);
+    
+    Adding a child to a node
+    modulationTargetsType.addChild (audioProcessorNode, -1, nullptr);//-1 for adding in last position
 }
 
 ModulationMatrixComponent::~ModulationMatrixComponent()
