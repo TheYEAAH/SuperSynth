@@ -10,10 +10,10 @@
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
-#include "OscillatorComponent.h"
-#include "FilterComponent.h"
-#include "OtherLookAndFeel.h"
-#include "ModulationMatrixComponent.h"
+#include "Components/OscillatorComponent.h"
+#include "Components/FilterComponent.h"
+#include "Components/OtherLookAndFeel.h"
+#include "Components/ModulationMatrixComponent.h"
 //==============================================================================
 /** Class that acts as the GUI for the SimpleSuperSynthAudioProcessor.
 */

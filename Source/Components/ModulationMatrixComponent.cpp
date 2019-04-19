@@ -82,8 +82,8 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
     static Identifier propertyName ("name");
     audioProcessorNode.setProperty (propertyName, "audioProcessorName", nullptr);
     
-    Adding a child to a node
-    modulationTargetsType.addChild (audioProcessorNode, -1, nullptr);//-1 for adding in last position
+    //Adding a child to a node
+    modulationTargetsNode.addChild (audioProcessorNode, -1, nullptr);//-1 for adding in last position
 }
 
 ModulationMatrixComponent::~ModulationMatrixComponent()
