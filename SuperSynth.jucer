@@ -15,9 +15,9 @@
   <MAINGROUP id="E0hLrL" name="SimpleSuperSynth">
     <GROUP id="{2E572B2F-BF6C-772C-805C-DC939BDAAD62}" name="Source">
       <GROUP id="{567E80D6-2318-A7AE-26FA-6DACCD49318E}" name="Components">
-        <FILE id="xQHXmh" name="ADSRComponent.h" compile="0" resource="0" file="Source/Components/ADSRComponent.h"/>
         <FILE id="BVEiHX" name="ADSRComponent.cpp" compile="1" resource="0"
               file="Source/Components/ADSRComponent.cpp"/>
+        <FILE id="QjUQYr" name="ADSRComponent.h" compile="0" resource="0" file="Source/Components/ADSRComponent.h"/>
         <FILE id="MxkNNz" name="FilterComponent.cpp" compile="1" resource="0"
               file="Source/Components/FilterComponent.cpp"/>
         <FILE id="pBMhEd" name="FilterComponent.h" compile="0" resource="0"

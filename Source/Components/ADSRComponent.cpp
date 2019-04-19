@@ -4,9 +4,6 @@
 ADSRComponent::ADSRComponent(AudioProcessorValueTreeState& vts)
 : valueTreeState (vts)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
-    
     envelopeGroup = new GroupComponent;
     attackLabel = new Label;
     attackSlider = new Slider;
