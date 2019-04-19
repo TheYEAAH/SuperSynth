@@ -26,15 +26,11 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
     targetsComboBox->addItem (TRANS("Filter1:cutoff"), 1);
     
     //Columns labels
-    createColumnTitleLabel(labelSources = new Label ("new label",
-                                          TRANS("Sources")), "Sources");
-    createColumnTitleLabel (labelTargets = new Label ("new label",
-                                           TRANS("Targets")),"Targets");
+    createColumnTitleLabel(labelSources = new Label ("new label", TRANS("Sources")), "Sources");
+    createColumnTitleLabel (labelTargets = new Label ("new label", TRANS("Targets")),"Targets");
 
-    createColumnTitleLabel (labelModAmount = new Label ("new label",
-                                           TRANS("ModAmount")),"ModAmount");
-    createColumnTitleLabel (labelTo = new Label ("new label",
-                                           TRANS("->")),"->");
+    createColumnTitleLabel (labelModAmount = new Label ("new label", TRANS("ModAmount")),"ModAmount");
+    createColumnTitleLabel (labelTo = new Label ("new label", TRANS("->")),"->");
 
     setSize (sourceColumnWidth +toLabelWidth + targetColumnWidth + toggleButtonWidth + paramSliderWidth, 600);
 
@@ -42,8 +38,6 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
 
 ModulationMatrixComponent::~ModulationMatrixComponent()
 {
-
-
     slider = nullptr;
     toggleButton = nullptr;
     sourcesComboBox = nullptr;
@@ -52,19 +46,15 @@ ModulationMatrixComponent::~ModulationMatrixComponent()
     labelTargets = nullptr;
     labelModAmount = nullptr;
     labelTo = nullptr;
-
-
 }
 
 //==============================================================================
 void ModulationMatrixComponent::paint (Graphics& g)
 {
-
 }
 
 void ModulationMatrixComponent::resized()
 {
-
     Rectangle<int> r = getLocalBounds();
 
     //Column titles
@@ -75,8 +65,6 @@ void ModulationMatrixComponent::resized()
     labelModAmount->setBounds(firstRow.removeFromLeft(toggleButtonWidth + paramSliderWidth));
 
     //rows
-
-
     slider->setSize (paramSliderWidth,paramSliderWidth);
 
     Rectangle<int> row = r.removeFromTop(rowHeight);
@@ -92,11 +80,9 @@ void ModulationMatrixComponent::comboBoxChanged (ComboBox* comboBoxThatHasChange
 {
     if (comboBoxThatHasChanged == sourcesComboBox)
     {
-
     }
     else if (comboBoxThatHasChanged == targetsComboBox)
     {
-
     }
 }
 
