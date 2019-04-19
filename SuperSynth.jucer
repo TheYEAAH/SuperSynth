@@ -34,10 +34,6 @@
               file="Source/Components/OtherLookAndFeel.cpp"/>
         <FILE id="DvpTmX" name="OtherLookAndFeel.h" compile="0" resource="0"
               file="Source/Components/OtherLookAndFeel.h"/>
-        <FILE id="UnJujL" name="SliderRotaryVerticalDrag.cpp" compile="1" resource="0"
-              file="Source/Components/SliderRotaryVerticalDrag.cpp"/>
-        <FILE id="moooS3" name="SliderRotaryVerticalDrag.h" compile="0" resource="0"
-              file="Source/Components/SliderRotaryVerticalDrag.h"/>
       </GROUP>
       <FILE id="GsW1k6" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
