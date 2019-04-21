@@ -51,9 +51,6 @@
       <FILE id="YDPXTK" name="SineWaveVoice.cpp" compile="1" resource="0"
             file="Source/SineWaveVoice.cpp"/>
       <FILE id="WxnXqN" name="SineWaveVoice.h" compile="0" resource="0" file="Source/SineWaveVoice.h"/>
-      <FILE id="r9YoQo" name="ADSRGenerator.cpp" compile="1" resource="0"
-            file="Source/ADSRGenerator.cpp"/>
-      <FILE id="tjPuuj" name="ADSRGenerator.h" compile="0" resource="0" file="Source/ADSRGenerator.h"/>
       <FILE id="mMGEnx" name="SuperWaveGenerator.cpp" compile="1" resource="0"
             file="Source/SuperWaveGenerator.cpp"/>
       <FILE id="XPUkI1" name="SuperWaveGenerator.h" compile="0" resource="0"
