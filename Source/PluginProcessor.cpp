@@ -14,48 +14,6 @@
 SuperSynthAudioProcessor::SuperSynthAudioProcessor()
 : parameters (*this, nullptr)
 {
-    /*parameters.createAndAddParameter ("waveType", // parameter ID
-                                  "waveType",// parameter name
-                                  String(),// parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f, 1.0f),// range
-                                  0.0f,// default value
-                                  [](float value)
-                                  {
-                                      // value to text function
-                                      return value < 0.5 ? "Sine" : "Saw";
-                                  },
-                                  [](const String& text)
-                                  {
-                                      // text to value function
-                                      if (text == "Sine")    return 0.0f;
-                                      if (text == "Saw")  return 1.0f;
-                                      return 0.0f;
-                                  });*/
-
-
-
-                         
-    /*
-                       
-
-
-    parameters.createAndAddParameter ("voiceNumber", // parameter ID
-                                  "voiceNumber",// parameter name
-                                  String(),// parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 8.0f, 1.0f),// range
-                                  4.0f,// default value
-                                  [](float value)
-                                  {
-                                      // value to text function
-                                      return value < 4.0 ? "2" : "4";
-                                  },
-                                  [](const String& text)
-                                  {
-                                      // text to value function
-                                      if (text == "2")    return 2.0f;
-                                      if (text == "4")  return 4.0f;
-                                      return 6.0f;
-                                  });*/
     parameters.createAndAddParameter ("retrig", // parameter ID
                                   "retrig",// parameter name
                                   String(),// parameter label (suffix)
@@ -97,7 +55,23 @@ SuperSynthAudioProcessor::SuperSynthAudioProcessor()
                                   1.f,         // default value
                                   nullptr,
                                   nullptr);
-                                  
+    /*parameters.createAndAddParameter ("waveType", // parameter ID
+                                  "waveType",// parameter name
+                                  String(),// parameter label (suffix)
+                                  NormalisableRange<float> (0.0f, 1.0f, 1.0f),// range
+                                  0.0f,// default value
+                                  [](float value)
+                                  {
+                                      // value to text function
+                                      return value < 0.5 ? "Sine" : "Saw";
+                                  },
+                                  [](const String& text)
+                                  {
+                                      // text to value function
+                                      if (text == "Sine")    return 0.0f;
+                                      if (text == "Saw")  return 1.0f;
+                                      return 0.0f;
+                                  });*/                              
                                   
     parameters.createAndAddParameter ("pitch",       // parameter ID
                                   "pitch",       // parameter name
@@ -124,13 +98,7 @@ SuperSynthAudioProcessor::SuperSynthAudioProcessor()
                                   nullptr,
                                   nullptr);
                                   
-    /*parameters.createAndAddParameter ("retrig",       // parameter ID
-                                  "retrig",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);*/
+
                                   
     parameters.createAndAddParameter ("pulseWidth",       // parameter ID
                                   "pulseWidth",       // parameter name
