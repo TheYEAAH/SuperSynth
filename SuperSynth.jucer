@@ -14,6 +14,7 @@
               pluginFormats="buildVST" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn,pluginProducesMidiOut">
   <MAINGROUP id="E0hLrL" name="SimpleSuperSynth">
     <GROUP id="{2E572B2F-BF6C-772C-805C-DC939BDAAD62}" name="Source">
+<<<<<<< HEAD
       <GROUP id="{13EEE9CE-7667-7C3F-3C5A-CC50E13FC051}" name="Components">
         <FILE id="mFFPBy" name="ADSRComponent.cpp" compile="1" resource="0"
               file="Source/Components/ADSRComponent.cpp"/>
@@ -43,6 +44,29 @@
             file="Source/ModulationMatrix.cpp"/>
       <FILE id="IjjOeR" name="ModulationMatrix.h" compile="0" resource="0"
             file="Source/ModulationMatrix.h"/>
+=======
+      <GROUP id="{567E80D6-2318-A7AE-26FA-6DACCD49318E}" name="Components">
+        <FILE id="BVEiHX" name="ADSRComponent.cpp" compile="1" resource="0"
+              file="Source/Components/ADSRComponent.cpp"/>
+        <FILE id="QjUQYr" name="ADSRComponent.h" compile="0" resource="0" file="Source/Components/ADSRComponent.h"/>
+        <FILE id="MxkNNz" name="FilterComponent.cpp" compile="1" resource="0"
+              file="Source/Components/FilterComponent.cpp"/>
+        <FILE id="pBMhEd" name="FilterComponent.h" compile="0" resource="0"
+              file="Source/Components/FilterComponent.h"/>
+        <FILE id="Htr5P5" name="ModulationMatrixComponent.cpp" compile="1"
+              resource="0" file="Source/Components/ModulationMatrixComponent.cpp"/>
+        <FILE id="lLstTc" name="ModulationMatrixComponent.h" compile="0" resource="0"
+              file="Source/Components/ModulationMatrixComponent.h"/>
+        <FILE id="E3uC2j" name="OscillatorComponent.cpp" compile="1" resource="0"
+              file="Source/Components/OscillatorComponent.cpp"/>
+        <FILE id="VPc5u5" name="OscillatorComponent.h" compile="0" resource="0"
+              file="Source/Components/OscillatorComponent.h"/>
+        <FILE id="E3oRRm" name="OtherLookAndFeel.cpp" compile="1" resource="0"
+              file="Source/Components/OtherLookAndFeel.cpp"/>
+        <FILE id="DvpTmX" name="OtherLookAndFeel.h" compile="0" resource="0"
+              file="Source/Components/OtherLookAndFeel.h"/>
+      </GROUP>
+>>>>>>> master
       <FILE id="GsW1k6" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="IcMSby" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
