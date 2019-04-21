@@ -30,7 +30,15 @@ public:
     void resized() override;
 
 private:
-
+    /*creates a Label with the given text and textValueSuffix.*/
+    void createLabel(Label *label, const String &text);
+    
+    /*creates a slider with the given text and textValueSuffix.*/
+    void createSlider(Slider *slider, const String &newID);
+    
+    /*creates a slider with the given text and textValueSuffix.*/
+    void createSlider(Slider *slider, const String &newID, const String &suffix);
+    
     ScopedPointer<GroupComponent> filterGroup;
     
     ScopedPointer<Slider> cutoffSlider;
