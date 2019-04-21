@@ -11,7 +11,8 @@
 #include "FilterComponent.h"
 
 //==============================================================================
-FilterComponent::FilterComponent()
+FilterComponent::FilterComponent(AudioProcessorValueTreeState& vts)
+: valueTreeState (vts)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -19,7 +20,7 @@ FilterComponent::FilterComponent()
     
     filterGroup = new GroupComponent;
     cutoffLabel = new Label;
-    cutoff = new Slider;
+    cutoffSlider = new Slider;
     resonanceLabel = new Label;
     resonance = new Slider;   
     filterTypeLabel = new Label;
@@ -43,15 +44,15 @@ FilterComponent::FilterComponent()
     cutoffLabel->setText ("cutoff", dontSendNotification);
     addAndMakeVisible (cutoffLabel);
     //Slider
-    cutoff->setSliderStyle (Slider::RotaryVerticalDrag);
-    cutoff->setRange (0.0, 127.0, 1.0);
-    cutoff->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    cutoff->setPopupDisplayEnabled (true, true,this,1000);
-    cutoff->setTextValueSuffix (" Hz");
-    cutoff->setValue (1.0);
-    cutoff->setComponentID("cutoff");
-    addAndMakeVisible (cutoff);
-    
+    cutoffSlider->setSliderStyle (Slider::RotaryVerticalDrag);
+    cutoffSlider->setRange (0.0, 127.0, 1.0);
+    cutoffSlider->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
+    cutoffSlider->setPopupDisplayEnabled (false, true, this);
+    cutoffSlider->setTextValueSuffix (" Hz");
+    cutoffSlider->setValue (1.0);
+    cutoffSlider->setComponentID("cutoff");
+    addAndMakeVisible (cutoffSlider);
+    cutoffAttachment = new SliderAttachment (valueTreeState, "cutoff", *cutoffSlider);
     //resonance
     //Label
     resonanceLabel->setFont (Font (12.00f, Font::plain));
@@ -65,7 +66,7 @@ FilterComponent::FilterComponent()
     resonance->setSliderStyle (Slider::RotaryVerticalDrag);
     resonance->setRange (0.0, 127.0, 1.0);
     resonance->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    resonance->setPopupDisplayEnabled (true, true,this,1000);
+    resonance->setPopupDisplayEnabled (false, true, this);
     resonance->setTextValueSuffix (" Hz");
     resonance->setValue (1.0);
     resonance->setComponentID("resonance");
@@ -91,13 +92,14 @@ FilterComponent::FilterComponent()
 
 FilterComponent::~FilterComponent()
 {
-    delete filterGroup;
-    delete cutoffLabel;
-    delete cutoff;
-    delete resonanceLabel;
-    delete resonance;   
-    delete filterTypeLabel;
-    delete filterType;
+    cutoffAttachment = nullptr;
+    filterGroup = nullptr;
+    cutoffLabel = nullptr;
+    cutoffSlider = nullptr;
+    resonanceLabel = nullptr;
+    resonance = nullptr;   
+    filterTypeLabel = nullptr;
+    filterType = nullptr;
 }
 
 void FilterComponent::paint (Graphics& g)
@@ -127,7 +129,7 @@ void FilterComponent::resized()
     filterGroup->setBounds(0, 0, 168, 104);
     
     cutoffLabel->setBounds (3, 13, 40, 12);//x,y,width,height
-    cutoff->setBounds(8,26,30,30);
+    cutoffSlider->setBounds(8,26,30,30);
     resonanceLabel->setBounds (43, 13, 40, 12);//x,y,width,height
     resonance->setBounds(48,26,30,30);
     filterTypeLabel->setBounds (83, 13, 40, 12);//x,y,width,height

@@ -8,6 +8,7 @@
   ==============================================================================
 */
 #pragma once
+
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
@@ -16,28 +17,36 @@
 class FilterComponent    : public Component
 {
 public:
-    FilterComponent();
-    ~FilterComponent();
+    typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
 
+    
+    
+    FilterComponent(AudioProcessorValueTreeState& vts);
+    ~FilterComponent();
+    
+
+    
     void paint (Graphics&) override;
     void resized() override;
 
 private:
 
-    GroupComponent * filterGroup;
+    ScopedPointer<GroupComponent> filterGroup;
     
-    Slider * cutoff;
-    Slider * resonance;
+    ScopedPointer<Slider> cutoffSlider;
+    ScopedPointer<Slider> resonance;
     //Slider keyTrack;
     //Slider velocity;
-    ComboBox * filterType;
+    ScopedPointer<ComboBox> filterType;
     
-    Label * cutoffLabel;
-    Label * resonanceLabel;
-    Label * filterTypeLabel;
+    ScopedPointer<Label> cutoffLabel;
+    ScopedPointer<Label> resonanceLabel;
+    ScopedPointer<Label> filterTypeLabel;
     //Label keyTrackLabel;
     //Label velocityLabel;
     
+    ScopedPointer<SliderAttachment> cutoffAttachment;
+    AudioProcessorValueTreeState& valueTreeState;    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterComponent)
 };

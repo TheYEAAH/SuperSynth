@@ -23,7 +23,7 @@ SuperSynthAudioProcessorEditor::SuperSynthAudioProcessorEditor (AudioProcessor& 
 
     addAndMakeVisible (oscillator = new OscillatorComponent(valueTreeState));
 
-    addAndMakeVisible (filter = new FilterComponent());
+    addAndMakeVisible (filter = new FilterComponent(valueTreeState));
     
     setSize (oscillator->getWidth()*4 + modulationMatrix->getWidth(),oscillator->getHeight() + filter->getHeight());
 }
