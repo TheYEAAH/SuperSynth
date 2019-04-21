@@ -38,21 +38,13 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     addAndMakeVisible (amplitudeLabel);
 
     //Slider
-<<<<<<< HEAD:Source/Components/OscillatorComponent.cpp
     /*amplitudeSlider.setSliderStyle (Slider::RotaryVerticalDrag);
-=======
-    /*
->>>>>>> master:Source/Components/OscillatorComponent.cpp
     amplitudeSlider.setRange (0.0, 127.0, 1.0);
     amplitudeSlider.setTextBoxStyle (Slider::NoTextBox, true, paramSliderWidth,paramLabelHeight);
     amplitudeSlider.setPopupDisplayEnabled (true, this);
     amplitudeSlider.setTextValueSuffix (" dB");
     amplitudeSlider.setValue (1.);
     amplitudeSlider.setComponentID("amplitude");*/
-<<<<<<< HEAD:Source/Components/OscillatorComponent.cpp
-=======
-    
->>>>>>> master:Source/Components/OscillatorComponent.cpp
     addAndMakeVisible (amplitudeSlider);
     amplitudeAttachment = new SliderAttachment (valueTreeState, "amplitude", amplitudeSlider);
     
@@ -95,11 +87,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     fineSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     fineSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);
     addAndMakeVisible (fineSlider);
-<<<<<<< HEAD:Source/Components/OscillatorComponent.cpp
     fineAttachment = new SliderAttachment (valueTreeState, "fine", pitchSlider);
-=======
-    fineAttachment = new SliderAttachment (valueTreeState, "fine", fineSlider);
->>>>>>> master:Source/Components/OscillatorComponent.cpp
     
     voiceNumberLabel.setText ("voiceNumber", dontSendNotification);
     addAndMakeVisible (voiceNumberLabel);
@@ -160,10 +148,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
 OscillatorComponent::~OscillatorComponent()
 {
     //delete oscillatorGroup;
-<<<<<<< HEAD:Source/Components/OscillatorComponent.cpp
 
-=======
->>>>>>> master:Source/Components/OscillatorComponent.cpp
     //delete amplitude;
 
 }
