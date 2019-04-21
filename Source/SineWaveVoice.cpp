@@ -105,7 +105,7 @@ void SineWaveVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startS
         }
         else
         {
-            oscillator->getWave(outputBuffer, startSample, numSamples);
+            oscillator->renderNextBlock(outputBuffer, startSample, numSamples);
             leftFilter.processSamples(outputBuffer.getWritePointer(0),numSamples);//left channel
             rightFilter.processSamples(outputBuffer.getWritePointer(1),numSamples);//right channel
             

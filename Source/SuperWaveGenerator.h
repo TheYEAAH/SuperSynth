@@ -60,7 +60,7 @@ public:
     /** Renders the next block of data.
     The output audio data must be added to the current contents of the buffer provided. 
     Only the region of the buffer between startSample and (startSample + numSamples) should be altered by this method. */
-	void getWave(AudioSampleBuffer& outputBuffer, int startSample, int numSamples) const;
+	void renderNextBlock(AudioSampleBuffer& outputBuffer, int startSample, int numSamples) const;
 	
 	/**Sets the SuperwaveGenerator base frequency. */
 	void setFrequency(float newFrequency);//used to change the frequency
