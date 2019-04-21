@@ -11,7 +11,8 @@
 #include "FilterComponent.h"
 
 //==============================================================================
-FilterComponent::FilterComponent()
+FilterComponent::FilterComponent(AudioProcessorValueTreeState& vts)
+: valueTreeState (vts)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -19,7 +20,7 @@ FilterComponent::FilterComponent()
     
     filterGroup = new GroupComponent;
     cutoffLabel = new Label;
-    cutoff = new Slider;
+    cutoffSlider = new Slider;
     resonanceLabel = new Label;
     resonance = new Slider;   
     filterTypeLabel = new Label;
@@ -34,52 +35,18 @@ FilterComponent::FilterComponent()
     addAndMakeVisible (filterGroup);
     
     //cutoff
-    //Label
-    cutoffLabel->setFont (Font (12.00f, Font::plain));
-    cutoffLabel->setJustificationType (Justification::centred);
-    cutoffLabel->setEditable (false, false, false);
-    cutoffLabel->setColour (TextEditor::textColourId, Colours::black);
-    cutoffLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
-    cutoffLabel->setText ("cutoff", dontSendNotification);
-    addAndMakeVisible (cutoffLabel);
-    //Slider
-    cutoff->setSliderStyle (Slider::RotaryVerticalDrag);
-    cutoff->setRange (0.0, 127.0, 1.0);
-    cutoff->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    cutoff->setPopupDisplayEnabled (true, true,this,1000);
-    cutoff->setTextValueSuffix (" Hz");
-    cutoff->setValue (1.0);
-    cutoff->setComponentID("cutoff");
-    addAndMakeVisible (cutoff);
+    createLabel(cutoffLabel, "cutoff");
+    createSlider(cutoffSlider, "cutoff"," Hz");
+    cutoffAttachment = new SliderAttachment (valueTreeState, "cutoff", *cutoffSlider);
     
     //resonance
-    //Label
-    resonanceLabel->setFont (Font (12.00f, Font::plain));
-    resonanceLabel->setJustificationType (Justification::centred);
-    resonanceLabel->setEditable (false, false, false);
-    resonanceLabel->setColour (TextEditor::textColourId, Colours::black);
-    resonanceLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
-    resonanceLabel->setText ("res", dontSendNotification);
-    addAndMakeVisible (resonanceLabel);
-    //Slider
-    resonance->setSliderStyle (Slider::RotaryVerticalDrag);
-    resonance->setRange (0.0, 127.0, 1.0);
-    resonance->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    resonance->setPopupDisplayEnabled (true, true,this,1000);
-    resonance->setTextValueSuffix (" Hz");
-    resonance->setValue (1.0);
-    resonance->setComponentID("resonance");
-    addAndMakeVisible (resonance);
+    createLabel(resonanceLabel, "res");
+    createSlider(cutoffSlider, "resonance");
+
     
     //filterType
     //Label
-    filterTypeLabel->setFont (Font (12.00f, Font::plain));
-    filterTypeLabel->setJustificationType (Justification::centred);
-    filterTypeLabel->setEditable (false, false, false);
-    filterTypeLabel->setColour (TextEditor::textColourId, Colours::black);
-    filterTypeLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
-    filterTypeLabel->setText ("Type", dontSendNotification);
-    addAndMakeVisible (filterTypeLabel);
+    createLabel(filterTypeLabel, "Type");
     //ComboBox
     filterType->setEditableText (false);
     filterType->setJustificationType (Justification::centredLeft);
@@ -91,33 +58,18 @@ FilterComponent::FilterComponent()
 
 FilterComponent::~FilterComponent()
 {
-    delete filterGroup;
-    delete cutoffLabel;
-    delete cutoff;
-    delete resonanceLabel;
-    delete resonance;   
-    delete filterTypeLabel;
-    delete filterType;
+    cutoffAttachment = nullptr;
+    filterGroup = nullptr;
+    cutoffLabel = nullptr;
+    cutoffSlider = nullptr;
+    resonanceLabel = nullptr;
+    resonance = nullptr;   
+    filterTypeLabel = nullptr;
+    filterType = nullptr;
 }
 
 void FilterComponent::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-/*
-    g.fillAll (Colours::white);   // clear the background
-
-    g.setColour (Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (Colours::lightblue);
-    g.setFont (14.0f);
-    g.drawText ("FilterComponent", getLocalBounds(),
-                Justification::centred, true);   // draw some placeholder tex*/
 }
 
 void FilterComponent::resized()
@@ -127,7 +79,7 @@ void FilterComponent::resized()
     filterGroup->setBounds(0, 0, 168, 104);
     
     cutoffLabel->setBounds (3, 13, 40, 12);//x,y,width,height
-    cutoff->setBounds(8,26,30,30);
+    cutoffSlider->setBounds(8,26,30,30);
     resonanceLabel->setBounds (43, 13, 40, 12);//x,y,width,height
     resonance->setBounds(48,26,30,30);
     filterTypeLabel->setBounds (83, 13, 40, 12);//x,y,width,height
@@ -137,4 +89,31 @@ void FilterComponent::resized()
     keyTrack.setBounds(8,69,30,30);
     velocityLabel.setBounds (43, 57, 40, 12);//x,y,width,height
     velocity.setBounds(48,69,30,30);*/
+}
+
+void FilterComponent::createLabel(Label *label, const String &newText)
+{
+    label->setFont (Font (12.00f, Font::plain));
+    label->setJustificationType (Justification::centred);
+    label->setEditable (false, false, false);
+    label->setColour (TextEditor::textColourId, Colours::black);
+    label->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    label->setText (newText, dontSendNotification);
+    addAndMakeVisible (label);
+}
+
+void FilterComponent::createSlider(Slider *slider, const String &newID)
+{
+    slider->setSliderStyle (Slider::RotaryVerticalDrag);
+    slider->setRange (0.0, 1.0, 0.0);
+    slider->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
+    slider->setPopupDisplayEnabled (false, true, this);
+    slider->setValue (1.0);
+    slider->setComponentID(newID);
+    addAndMakeVisible (slider);
+}
+void FilterComponent::createSlider(Slider *slider, const String &newID, const String &suffix)
+{
+    createSlider(slider, newID);
+    slider->setTextValueSuffix (suffix);
 }

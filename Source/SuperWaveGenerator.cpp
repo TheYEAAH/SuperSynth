@@ -110,12 +110,12 @@ SuperWaveGenerator::~SuperWaveGenerator()
     parameters.removeParameterListener	("amplitude", this);
 }
 
-void SuperWaveGenerator::renderNextBlock(AudioSampleBuffer& outputBuffer, int startSample, int numSamples) const
+void SuperWaveGenerator::getWave(AudioSampleBuffer& outputBuffer, int startSample, int numSamples) const
 {
     for (int i=0; i < (int) *parameters.getRawParameterValue ("voiceNumber"); i++)
 
     {
-        oscillators[i]->renderNextBlock(outputBuffer, startSample, numSamples);
+        oscillators[i]->getWave(outputBuffer, startSample, numSamples);
     }
 
 }

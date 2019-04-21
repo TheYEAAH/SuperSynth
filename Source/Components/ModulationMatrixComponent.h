@@ -1,11 +1,11 @@
 
 #pragma once
-
 #include "../JuceLibraryCode/JuceHeader.h"
 
 
 
-class ModulationMatrixComponent  : public Component
+class ModulationMatrixComponent  : public Component,
+                                   public ComboBox::Listener
 {
 public:
     //==============================================================================
@@ -25,23 +25,33 @@ public:
         toLabelWidth       = 23//label with "->" text
     };
 
-    void paint (Graphics&) override;
+    void paint (Graphics& g) override;
     void resized() override;
-    
-
-
+    void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
 
 
 
 private:
+    /*creates a Label with the given text and textValueSuffix.*/
+    void createColumnTitleLabel(Label *label, const String &text);
+    
+    /*creates a ComboBox with the given text and textValueSuffix.*/
+    void createComboBox(ComboBox *comboBox, const String &newTooltip);
+    
+    /*creates a slider with the given text and textValueSuffix.*/
+    void createSlider(Slider *slider, const String &newID);
+    
+    /*creates a slider with the given text and textValueSuffix.*/
+    void createSlider(Slider *slider, const String &newID, const String &suffix);
+    
     ScopedPointer<Slider> slider;
     ScopedPointer<ToggleButton> toggleButton;
-    ScopedPointer<ComboBox> comboBox;
-    ScopedPointer<ComboBox> comboBox2;
-    ScopedPointer<Label> label;
-    ScopedPointer<Label> label2;
-    ScopedPointer<Label> label3;
-    ScopedPointer<Label> label4;
+    ScopedPointer<ComboBox> sourcesComboBox;
+    ScopedPointer<ComboBox> targetsComboBox;
+    ScopedPointer<Label> labelSources;
+    ScopedPointer<Label> labelTargets;
+    ScopedPointer<Label> labelModAmount;
+    ScopedPointer<Label> labelTo;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ModulationMatrixComponent)
 };

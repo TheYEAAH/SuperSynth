@@ -76,7 +76,7 @@ void SineWaveVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startS
     {
         if (tailOff > 0)//on a arrêté d'appuyer sur la touche, release
         {
-            /*oscillator->renderNextBlock(outputBuffer, startSample, numSamples);
+            /*oscillator->getWave(outputBuffer, startSample, numSamples);
             leftFilter.processSamples(outputBuffer.getWritePointer(0),numSamples);//left channel
             rightFilter.processSamples(outputBuffer.getWritePointer(1),numSamples);//right channel*/
             while (--numSamples >= 0)
@@ -101,11 +101,11 @@ void SineWaveVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startS
                 }
             }
         
-        //oscillator->renderNextBlock(outputBuffer.getArrayOfWritePointers(), numSamples);
+        //oscillator->getWave(outputBuffer.getArrayOfWritePointers(), numSamples);
         }
         else
         {
-            oscillator->renderNextBlock(outputBuffer, startSample, numSamples);
+            oscillator->getWave(outputBuffer, startSample, numSamples);
             leftFilter.processSamples(outputBuffer.getWritePointer(0),numSamples);//left channel
             rightFilter.processSamples(outputBuffer.getWritePointer(1),numSamples);//right channel
             
