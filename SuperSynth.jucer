@@ -14,6 +14,37 @@
               pluginFormats="buildVST" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn,pluginProducesMidiOut">
   <MAINGROUP id="E0hLrL" name="SimpleSuperSynth">
     <GROUP id="{2E572B2F-BF6C-772C-805C-DC939BDAAD62}" name="Source">
+<<<<<<< HEAD
+      <GROUP id="{13EEE9CE-7667-7C3F-3C5A-CC50E13FC051}" name="Components">
+        <FILE id="mFFPBy" name="ADSRComponent.cpp" compile="1" resource="0"
+              file="Source/Components/ADSRComponent.cpp"/>
+        <FILE id="WVVLnd" name="ADSRComponent.h" compile="0" resource="0" file="Source/Components/ADSRComponent.h"/>
+        <FILE id="rEsIe7" name="FilterComponent.cpp" compile="1" resource="0"
+              file="Source/Components/FilterComponent.cpp"/>
+        <FILE id="p3DXZM" name="FilterComponent.h" compile="0" resource="0"
+              file="Source/Components/FilterComponent.h"/>
+        <FILE id="SHuMH2" name="ModulationMatrixComponent.cpp" compile="1"
+              resource="0" file="Source/Components/ModulationMatrixComponent.cpp"/>
+        <FILE id="M2J9ay" name="ModulationMatrixComponent.h" compile="0" resource="0"
+              file="Source/Components/ModulationMatrixComponent.h"/>
+        <FILE id="YXtXMs" name="OscillatorComponent.cpp" compile="1" resource="0"
+              file="Source/Components/OscillatorComponent.cpp"/>
+        <FILE id="boQHkJ" name="OscillatorComponent.h" compile="0" resource="0"
+              file="Source/Components/OscillatorComponent.h"/>
+        <FILE id="VVeAZP" name="OtherLookAndFeel.cpp" compile="1" resource="0"
+              file="Source/Components/OtherLookAndFeel.cpp"/>
+        <FILE id="o8HeoK" name="OtherLookAndFeel.h" compile="0" resource="0"
+              file="Source/Components/OtherLookAndFeel.h"/>
+        <FILE id="j0vYJv" name="SliderRotaryVerticalDrag.cpp" compile="1" resource="0"
+              file="Source/Components/SliderRotaryVerticalDrag.cpp"/>
+        <FILE id="pLi2Gb" name="SliderRotaryVerticalDrag.h" compile="0" resource="0"
+              file="Source/Components/SliderRotaryVerticalDrag.h"/>
+      </GROUP>
+      <FILE id="StwyLr" name="ModulationMatrix.cpp" compile="1" resource="0"
+            file="Source/ModulationMatrix.cpp"/>
+      <FILE id="IjjOeR" name="ModulationMatrix.h" compile="0" resource="0"
+            file="Source/ModulationMatrix.h"/>
+=======
       <GROUP id="{567E80D6-2318-A7AE-26FA-6DACCD49318E}" name="Components">
         <FILE id="BVEiHX" name="ADSRComponent.cpp" compile="1" resource="0"
               file="Source/Components/ADSRComponent.cpp"/>
@@ -35,6 +66,7 @@
         <FILE id="DvpTmX" name="OtherLookAndFeel.h" compile="0" resource="0"
               file="Source/Components/OtherLookAndFeel.h"/>
       </GROUP>
+>>>>>>> master
       <FILE id="GsW1k6" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="IcMSby" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
@@ -51,9 +83,6 @@
       <FILE id="YDPXTK" name="SineWaveVoice.cpp" compile="1" resource="0"
             file="Source/SineWaveVoice.cpp"/>
       <FILE id="WxnXqN" name="SineWaveVoice.h" compile="0" resource="0" file="Source/SineWaveVoice.h"/>
-      <FILE id="r9YoQo" name="ADSRGenerator.cpp" compile="1" resource="0"
-            file="Source/ADSRGenerator.cpp"/>
-      <FILE id="tjPuuj" name="ADSRGenerator.h" compile="0" resource="0" file="Source/ADSRGenerator.h"/>
       <FILE id="mMGEnx" name="SuperWaveGenerator.cpp" compile="1" resource="0"
             file="Source/SuperWaveGenerator.cpp"/>
       <FILE id="XPUkI1" name="SuperWaveGenerator.h" compile="0" resource="0"

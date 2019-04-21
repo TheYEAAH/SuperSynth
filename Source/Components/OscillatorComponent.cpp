@@ -38,14 +38,13 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     addAndMakeVisible (amplitudeLabel);
 
     //Slider
-    /*
+    /*amplitudeSlider.setSliderStyle (Slider::RotaryVerticalDrag);
     amplitudeSlider.setRange (0.0, 127.0, 1.0);
     amplitudeSlider.setTextBoxStyle (Slider::NoTextBox, true, paramSliderWidth,paramLabelHeight);
     amplitudeSlider.setPopupDisplayEnabled (true, this);
     amplitudeSlider.setTextValueSuffix (" dB");
     amplitudeSlider.setValue (1.);
     amplitudeSlider.setComponentID("amplitude");*/
-    
     addAndMakeVisible (amplitudeSlider);
     amplitudeAttachment = new SliderAttachment (valueTreeState, "amplitude", amplitudeSlider);
     
@@ -88,7 +87,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     fineSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     fineSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);
     addAndMakeVisible (fineSlider);
-    fineAttachment = new SliderAttachment (valueTreeState, "fine", fineSlider);
+    fineAttachment = new SliderAttachment (valueTreeState, "fine", pitchSlider);
     
     voiceNumberLabel.setText ("voiceNumber", dontSendNotification);
     addAndMakeVisible (voiceNumberLabel);
@@ -149,6 +148,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
 OscillatorComponent::~OscillatorComponent()
 {
     //delete oscillatorGroup;
+
     //delete amplitude;
 
 }

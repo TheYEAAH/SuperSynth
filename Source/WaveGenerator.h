@@ -41,7 +41,7 @@ public:
     The output audio data must be added to the current contents of the buffer provided. 
     Only the region of the buffer between startSample and (startSample + numSamples) 
     should be altered by this method. */
-	void getWave(AudioSampleBuffer& outputBuffer, int startSample, int numSamples);
+	void renderNextBlock(AudioSampleBuffer& outputBuffer, int startSample, int numSamples);
 
 	/** Sets the oscillator frequency in Hertz. */
 	void setFrequency(float newFrequency);

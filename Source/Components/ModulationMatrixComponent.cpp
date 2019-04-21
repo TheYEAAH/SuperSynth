@@ -14,111 +14,126 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
     slider->setSliderStyle (Slider::RotaryVerticalDrag);
     slider->setTextBoxStyle (Slider::NoTextBox, true, 0, 0);
 
-    //sourcesComboBox
-    createComboBox(sourcesComboBox = new ComboBox ("new combo box"),"Select a source");
-    sourcesComboBox->addItem (TRANS("Env 1"), 1);
-    sourcesComboBox->addItem (TRANS("Env 2"), 2);
-    sourcesComboBox->addItem (TRANS("LFO 1"), 3);
-    sourcesComboBox->addItem (TRANS("LFO 2"), 4);
-    
-    //targetsComboBox
-    createComboBox(targetsComboBox = new ComboBox ("new combo box"),"Select a target");
-    targetsComboBox->addItem (TRANS("Filter1:cutoff"), 1);
-    
-    //Columns labels
-    createColumnTitleLabel(labelSources = new Label ("new label", TRANS("Sources")), "Sources");
-    createColumnTitleLabel (labelTargets = new Label ("new label", TRANS("Targets")),"Targets");
 
-    createColumnTitleLabel (labelModAmount = new Label ("new label", TRANS("ModAmount")),"ModAmount");
-    createColumnTitleLabel (labelTo = new Label ("new label", TRANS("->")),"->");
+    addAndMakeVisible (comboBox = new ComboBox ("new combo box"));
+    comboBox->setTooltip (TRANS("Select a source"));
+    comboBox->setEditableText (false);
+    comboBox->setJustificationType (Justification::centredLeft);
+    comboBox->setTextWhenNothingSelected (String());
+    comboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    comboBox->addItem (TRANS("Env 1"), 1);
+    comboBox->addItem (TRANS("Env 2"), 2);
+    comboBox->addItem (TRANS("LFO 1"), 3);
+    comboBox->addItem (TRANS("LFO 2"), 4);
+    //comboBox->addListener (this);
+
+    addAndMakeVisible (comboBox2 = new ComboBox ("new combo box"));
+    comboBox2->setTooltip (TRANS("Select a target"));
+    comboBox2->setEditableText (false);
+    comboBox2->setJustificationType (Justification::centredLeft);
+    comboBox2->setTextWhenNothingSelected (String());
+    comboBox2->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    comboBox2->addItem (TRANS("Filter1:cutoff"), 1);
+    //comboBox2->addListener (this);
+
+    addAndMakeVisible (label = new Label ("new label",
+                                          TRANS("Sources")));
+    label->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
+    label->setJustificationType (Justification::centredLeft);
+    label->setEditable (false, false, false);
+    label->setColour (TextEditor::textColourId, Colours::black);
+    label->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (label2 = new Label ("new label",
+                                           TRANS("Targets")));
+    label2->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
+    label2->setJustificationType (Justification::centredLeft);
+    label2->setEditable (false, false, false);
+    label2->setColour (TextEditor::textColourId, Colours::black);
+    label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (label3 = new Label ("new label",
+                                           TRANS("ModAmount")));
+    label3->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
+    label3->setJustificationType (Justification::centredLeft);
+    label3->setEditable (false, false, false);
+    label3->setColour (TextEditor::textColourId, Colours::black);
+    label3->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (label4 = new Label ("new label",
+                                           TRANS("->")));
+    label4->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
+    label4->setJustificationType (Justification::centredLeft);
+    label4->setEditable (false, false, false);
+    label4->setColour (TextEditor::textColourId, Colours::black);
+    label4->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     setSize (sourceColumnWidth +toLabelWidth + targetColumnWidth + toggleButtonWidth + paramSliderWidth, 600);
-
+    
+    //Creating nodes
+    static Identifier audioProcessorType ("AudioProcessorType"); // pre-create an Identifier
+    ValueTree audioProcessorNode (audioProcessorType);           // This is a valid node, of type "AudioProcessorType"*/
+    static Identifier modulationSourcesType ("ModulationSourcesType");
+    ValueTree modulationSourcesNode (modulationSourcesType);
+    static Identifier modulationTargetsType ("ModulationTargetsType");
+    ValueTree modulationTargetsNode (modulationTargetsType);
+    
+    //Setting a property to a node
+    static Identifier propertyName ("name");
+    audioProcessorNode.setProperty (propertyName, "audioProcessorName", nullptr);
+    
+    //Adding a child to a node
+    modulationTargetsNode.addChild (audioProcessorNode, -1, nullptr);//-1 for adding in last position
 }
 
 ModulationMatrixComponent::~ModulationMatrixComponent()
 {
+
+
     slider = nullptr;
     toggleButton = nullptr;
-    sourcesComboBox = nullptr;
-    targetsComboBox = nullptr;
-    labelSources = nullptr;
-    labelTargets = nullptr;
-    labelModAmount = nullptr;
-    labelTo = nullptr;
+    comboBox = nullptr;
+    comboBox2 = nullptr;
+    label = nullptr;
+    label2 = nullptr;
+    label3 = nullptr;
+    label4 = nullptr;
+
+
 }
 
 //==============================================================================
 void ModulationMatrixComponent::paint (Graphics& g)
 {
+
 }
 
 void ModulationMatrixComponent::resized()
 {
+
     Rectangle<int> r = getLocalBounds();
 
     //Column titles
     Rectangle<int> firstRow = r.removeFromTop(rowHeight);
-    labelSources->setBounds(firstRow.removeFromLeft(sourceColumnWidth));
+    label->setBounds(firstRow.removeFromLeft(sourceColumnWidth));
     firstRow.removeFromLeft(toLabelWidth);
-    labelTargets->setBounds(firstRow.removeFromLeft(targetColumnWidth));
-    labelModAmount->setBounds(firstRow.removeFromLeft(toggleButtonWidth + paramSliderWidth));
+    label2->setBounds(firstRow.removeFromLeft(targetColumnWidth));
+    label3->setBounds(firstRow.removeFromLeft(toggleButtonWidth + paramSliderWidth));
 
     //rows
+
+
     slider->setSize (paramSliderWidth,paramSliderWidth);
 
     Rectangle<int> row = r.removeFromTop(rowHeight);
-    sourcesComboBox->setBounds (row.removeFromLeft(sourceColumnWidth).withSizeKeepingCentre(sourceColumnWidth,comboBoxHeight));
-    labelTo->setBounds (row.removeFromLeft(toLabelWidth));
-    targetsComboBox->setBounds (row.removeFromLeft(targetColumnWidth).withSizeKeepingCentre(sourceColumnWidth,comboBoxHeight));
+    comboBox->setBounds (row.removeFromLeft(sourceColumnWidth).withSizeKeepingCentre(sourceColumnWidth,comboBoxHeight));
+    label4->setBounds (row.removeFromLeft(toLabelWidth));
+    comboBox2->setBounds (row.removeFromLeft(targetColumnWidth).withSizeKeepingCentre(sourceColumnWidth,comboBoxHeight));
     toggleButton->setBounds (row.removeFromLeft(toggleButtonWidth));
     toggleButton->changeWidthToFitText();	
     slider->setBounds (row.removeFromLeft(paramSliderWidth));
+
+
 }
 
-void ModulationMatrixComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
-{
-    if (comboBoxThatHasChanged == sourcesComboBox)
-    {
-    }
-    else if (comboBoxThatHasChanged == targetsComboBox)
-    {
-    }
-}
 
-void ModulationMatrixComponent::createColumnTitleLabel(Label *label, const String &newText)
-{
-    labelSources->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
-    labelSources->setJustificationType (Justification::centredLeft);
-    labelSources->setEditable (false, false, false);
-    labelSources->setColour (TextEditor::textColourId, Colours::black);
-    labelSources->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
-    addAndMakeVisible (label);
-}
-
-void ModulationMatrixComponent::createSlider(Slider *slider, const String &newID)
-{
-    slider->setSliderStyle (Slider::RotaryVerticalDrag);
-    slider->setRange (0.0, 1.0, 0.0);
-    slider->setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
-    slider->setPopupDisplayEnabled (false, true, this);
-    slider->setValue (1.0);
-    slider->setComponentID(newID);
-    addAndMakeVisible (slider);
-}
-void ModulationMatrixComponent::createSlider(Slider *slider, const String &newID, const String &suffix)
-{
-    createSlider(slider, newID);
-    slider->setTextValueSuffix (suffix);
-}
-
-void ModulationMatrixComponent::createComboBox(ComboBox *comboBox, const String &newToolTip)
-{ 
-    comboBox->setTooltip (TRANS(newToolTip));
-    comboBox->setEditableText (false);
-    comboBox->setJustificationType (Justification::centredLeft);
-    comboBox->setTextWhenNothingSelected (String());
-    comboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    comboBox->addListener (this);
-    addAndMakeVisible (comboBox);
-}
