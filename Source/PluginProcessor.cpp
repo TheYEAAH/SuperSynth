@@ -12,183 +12,154 @@
 
 //==============================================================================
 SuperSynthAudioProcessor::SuperSynthAudioProcessor()
-: parameters (*this, nullptr)
-{
-    parameters.createAndAddParameter ("retrig", // parameter ID
-                                  "retrig",// parameter name
-                                  String(),// parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f, 1.0f),// range
-                                  0.0f,// default value
-                                  [](float value)
-                                  {
-                                      // value to text function
-                                      return value < 0.5 ? "Off" : "On";
-                                  },
-                                  [](const String& text)
-                                  {
-                                      // text to value function
-                                      if (text == "Off")    return 0.0f;
-                                      if (text == "On")  return 1.0f;
-                                      return 0.0f;
-                                  });
-                                  
-    parameters.createAndAddParameter ("amplitude",       // parameter ID
-                                  "amplitude",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.5f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("pan",       // parameter ID
-                                  "pan",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.5f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("waveType",       // parameter ID
-                                  "waveType",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 3.0f, 1.0f),    // range
-                                  1.f,         // default value
-                                  nullptr,
-                                  nullptr);
-    /*parameters.createAndAddParameter ("waveType", // parameter ID
-                                  "waveType",// parameter name
-                                  String(),// parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f, 1.0f),// range
-                                  0.0f,// default value
-                                  [](float value)
-                                  {
-                                      // value to text function
-                                      return value < 0.5 ? "Sine" : "Saw";
-                                  },
-                                  [](const String& text)
-                                  {
-                                      // text to value function
-                                      if (text == "Sine")    return 0.0f;
-                                      if (text == "Saw")  return 1.0f;
-                                      return 0.0f;
-                                  });*/                              
-                                  
-    parameters.createAndAddParameter ("pitch",       // parameter ID
-                                  "pitch",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("fine",       // parameter ID
-                                  "fine",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-                                  
-    parameters.createAndAddParameter ("phase",       // parameter ID
-                                  "phase",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
+: parameters (*this, nullptr, Identifier ("SupersynthAPVTS"),
+                {
+                    std::make_unique<AudioParameterBool> (
+                                                            "retrig", // parameter ID
+                                                            "retrig",// parameter name
+                                                            false,// default Value
+                                                            String(),// label (optional)
+                                                            nullptr,//stringFromBool
+                                                            nullptr//boolFromString
+                                                         ),
+                    std::make_unique<AudioParameterFloat> (
+                                                            "amplitude",// parameter ID
+                                                            "amplitude",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.5f// default value
+                                                          ),
+                    std::make_unique<AudioParameterFloat> (
+                                                            "pan",// parameter ID
+                                                            "pan",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.5f// default value
+                                                          ),
+                    std::make_unique<AudioParameterInt> (
+                                                            "waveType",// parameter ID
+                                                            "waveType",// parameter name
+                                                            0,//minValue
+                                                            3,//maxValue
+                                                            1,//defaultValue
+                                                            String(),//label (optional)
+                                                            [](int value, int maximumStringLength){
+                                    if (maximumStringLength >2)
+                                    {
+                                        switch ( value )
+                                        {
+                                            case 0:
+                                            return "sin";
+                                            case 1:
+                                            return "saw";
+                                            case 2:
+                                            return "sqr";
+                                            case 3:
+                                            return "tri";
+                                            default:
+                                            return "wav";
+                                        }
+                                    }else
+                                    {
+                                        return " ";
+                                    }
+                                    },//stringFromInt (optional)
+                                                            nullptr//intFromString (optional)
+                                                          ),
+                    std::make_unique<AudioParameterInt> (
+                                                            "pitch",// parameter ID
+                                                            "pitch",// parameter name
+                                                            -3,//minValue
+                                                            3,//maxValue
+                                                            0,//defaultValue
+                                                            String(),//label (optional)
+                                                            nullptr,//stringFromInt
+                                                            nullptr//intFromString
+                                                          ),
+                    std::make_unique<AudioParameterFloat> (
+                                                            "fine",// parameter ID
+                                                            "fine",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.0f// default value
+                                                          ),                                                          
+                    std::make_unique<AudioParameterFloat> (
+                                                            "phase",// parameter ID
+                                                            "phase",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.0f// default value
+                                                          ),       
+                    std::make_unique<AudioParameterFloat> (
+                                                            "pulseWidth",// parameter ID
+                                                            "pulseWidth",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.0f// default value
+                                                          ),
+                    std::make_unique<AudioParameterInt> (
+                                                            "voiceNumber",// parameter ID
+                                                            "voiceNumber",// parameter name
+                                                            0,//minValue
+                                                            8,//maxValue
+                                                            6,//defaultValue
+                                                            String(),//label (optional)
+                                                            nullptr,//stringFromInt
+                                                            nullptr//intFromString
+                                                          ),
+                    std::make_unique<AudioParameterFloat> (
+                                                            "detune",// parameter ID
+                                                            "detune",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.2f// default value
+                                                          ),
+                    std::make_unique<AudioParameterFloat> (
+                                                            "spread",// parameter ID
+                                                            "spread",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.5f// default value
+                                                          ),
+                    std::make_unique<AudioParameterFloat> (
+                                                            "ampAttack",// parameter ID
+                                                            "ampAttack",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.0f// default value
+                                                          ),
+                    std::make_unique<AudioParameterFloat> (
+                                                            "ampSustain",// parameter ID
+                                                            "ampSustain",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.0f// default value
+                                                          ),                                  
+                    std::make_unique<AudioParameterFloat> (
+                                                            "ampRelease",// parameter ID
+                                                            "ampRelease",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.0f// default value
+                                                          ),       
+                    std::make_unique<AudioParameterFloat> (
+                                                            "filterAttack",// parameter ID
+                                                            "filterAttack",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.0f// default value
+                                                          ),
+                    std::make_unique<AudioParameterFloat> (
+                                                            "filterSustain",// parameter ID
+                                                            "filterSustain",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.0f
+                                                          ),                                  
+                    std::make_unique<AudioParameterFloat> (
+                                                            "filterRelease",// parameter ID
+                                                            "filterRelease",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.0f// default value
+                                                          ),                                        
+                    std::make_unique<AudioParameterFloat> (
+                                                            "globalLevel",// parameter ID
+                                                            "globalLevel",// parameter name
+                                                            NormalisableRange<float> (0.0f, 1.0f),//normalisable Range
+                                                            0.5f// default value
+                                                          )
+                  })//this was the AudioProcessorValueTreeState::ParameterLayout
 
-                                  
-    parameters.createAndAddParameter ("pulseWidth",       // parameter ID
-                                  "pulseWidth",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("voiceNumber",       // parameter ID
-                                  "voiceNumber",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 8.0f, 1.0f),    // range
-                                  6.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("detune",       // parameter ID
-                                  "detune",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.2f,         // default value
-                                  nullptr,
-                                  nullptr);
-
-    parameters.createAndAddParameter ("spread",       // parameter ID
-                                  "spread",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.5f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("ampAttack",       // parameter ID
-                                  "ampAttack",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("ampSustain",       // parameter ID
-                                  "ampSustain",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("ampRelease",       // parameter ID
-                                  "ampSustain",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("filterAttack",       // parameter ID
-                                  "filterAttack",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("filterSustain",       // parameter ID
-                                  "filterSustain",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("filterRelease",       // parameter ID
-                                  "filterSustain",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.0f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.createAndAddParameter ("globalLevel",       // parameter ID
-                                  "globalLevel",       // parameter name
-                                  String(),     // parameter label (suffix)
-                                  NormalisableRange<float> (0.0f, 1.0f),    // range
-                                  0.5f,         // default value
-                                  nullptr,
-                                  nullptr);
-                                  
-    parameters.state = ValueTree (Identifier ("Supersynth"));
+{                                             
+    //parameters.state = ValueTree (Identifier ("Supersynth"));
 
     //initializing the synth 
     const int numVoices = 128;//128 voices
