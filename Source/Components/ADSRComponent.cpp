@@ -62,9 +62,6 @@ ADSRComponent::~ADSRComponent()
     releaseSlider = nullptr;
 }
 
-void ADSRComponent::paint (Graphics& g)
-{}
-
 void ADSRComponent::resized()
 {
     // This method is where you should set the bounds of any child

@@ -25,7 +25,6 @@ public:
         toLabelWidth       = 23//label with "->" text
     };
 
-    void paint (Graphics& g) override;
     void resized() override;
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
 
@@ -33,7 +32,7 @@ public:
 
 private:
     /*creates a Label with the given text and textValueSuffix.*/
-    void createColumnTitleLabel(Label *label, const String &text);
+    void createLabel(Label *label, const String &newText);
     
     /*creates a ComboBox with the given text and textValueSuffix.*/
     void createComboBox(ComboBox *comboBox, const String &newTooltip);

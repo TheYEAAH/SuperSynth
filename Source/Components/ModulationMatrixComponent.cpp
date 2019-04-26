@@ -26,11 +26,11 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
     targetsComboBox->addItem (TRANS("Filter1:cutoff"), 1);
     
     //Columns labels
-    createColumnTitleLabel(labelSources = new Label ("new label", TRANS("Sources")), "Sources");
-    createColumnTitleLabel (labelTargets = new Label ("new label", TRANS("Targets")),"Targets");
+    createLabel(labelSources = new Label ("new label", TRANS("Sources")), "Sources");
+    createLabel (labelTargets = new Label ("new label", TRANS("Targets")),"Targets");
 
-    createColumnTitleLabel (labelModAmount = new Label ("new label", TRANS("ModAmount")),"ModAmount");
-    createColumnTitleLabel (labelTo = new Label ("new label", TRANS("->")),"->");
+    createLabel (labelModAmount = new Label ("new label", TRANS("ModAmount")),"ModAmount");
+    createLabel (labelTo = new Label ("new label", TRANS("->")),"->");
 
     setSize (sourceColumnWidth +toLabelWidth + targetColumnWidth + toggleButtonWidth + paramSliderWidth, 600);
 
@@ -49,9 +49,6 @@ ModulationMatrixComponent::~ModulationMatrixComponent()
 }
 
 //==============================================================================
-void ModulationMatrixComponent::paint (Graphics& g)
-{
-}
 
 void ModulationMatrixComponent::resized()
 {
@@ -86,7 +83,7 @@ void ModulationMatrixComponent::comboBoxChanged (ComboBox* comboBoxThatHasChange
     }
 }
 
-void ModulationMatrixComponent::createColumnTitleLabel(Label *label, const String &newText)
+void ModulationMatrixComponent::createLabel(Label *label, const String &newText)
 {
     labelSources->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
     labelSources->setJustificationType (Justification::centredLeft);

@@ -13,7 +13,6 @@ public:
     ADSRComponent(AudioProcessorValueTreeState& vts);
     ~ADSRComponent();
 
-    void paint (Graphics&) override;
     void resized() override;
 
 private:

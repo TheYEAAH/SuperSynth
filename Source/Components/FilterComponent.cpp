@@ -68,10 +68,6 @@ FilterComponent::~FilterComponent()
     filterType = nullptr;
 }
 
-void FilterComponent::paint (Graphics& g)
-{
-}
-
 void FilterComponent::resized()
 {
     // This method is where you should set the bounds of any child

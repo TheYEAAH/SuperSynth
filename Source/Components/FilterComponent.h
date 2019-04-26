@@ -24,9 +24,6 @@ public:
     FilterComponent(AudioProcessorValueTreeState& vts);
     ~FilterComponent();
     
-
-    
-    void paint (Graphics&) override;
     void resized() override;
 
 private:
