@@ -359,8 +359,6 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 SuperSynthAudioProcessor::SuperSynthAudioProcessor()
 : parameters (*this, nullptr, Identifier ("SupersynthAPVTS"), createParameterLayout())
 {                                             
-    //parameters.state = ValueTree (Identifier ("Supersynth"));
-
     //initializing the synth 
     const int numVoices = 128;//128 voices
     // Add some voices...

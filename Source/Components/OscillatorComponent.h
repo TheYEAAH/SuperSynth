@@ -61,7 +61,6 @@ private:
     ToggleButton retrigButton;
     ToggleButton fixedButton;
 
-
     Label amplitudeLabel;
     Label panLabel;
     
