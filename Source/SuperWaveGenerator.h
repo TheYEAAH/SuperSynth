@@ -91,6 +91,7 @@ public:
     void parameterChanged(const String &parameterID, float newValue) override;
     //void setPhase(float newPhase);//sets phase value, between 0 - 1
     //void setPulseWidth
+    
 private:
     WaveGenerator * oscillators[8];
     AudioProcessorValueTreeState& parameters;

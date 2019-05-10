@@ -34,7 +34,6 @@ public:
     OscillatorComponent(AudioProcessorValueTreeState& vts);    
     ~OscillatorComponent();
 
-    void paint (Graphics&);
     void resized();
 
 private:
