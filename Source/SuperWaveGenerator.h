@@ -92,6 +92,123 @@ public:
     //void setPhase(float newPhase);//sets phase value, between 0 - 1
     //void setPulseWidth
     
+    static std::unique_ptr<AudioProcessorParameterGroup> SuperWaveGenerator::createProcessorParameters (const String& labelNum = String() )
+{
+	 auto oscillatorParameterGroup = std::make_unique<AudioProcessorParameterGroup>("oscillator" + labelNum, "oscillator" + labelNum, "|");
+	 oscillatorParameterGroup->addChild(
+		 std::make_unique<AudioParameterFloat>(
+			 "amplitude" + labelNum,// parameter ID
+			 "amplitude",// parameter name
+			 NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
+			 0.5f// default value
+			 ),
+		 std::make_unique<AudioParameterInt>(
+			 "waveType" + labelNum,// parameter ID
+			 "waveType",// parameter name
+			 0,//minValue
+			 3,//maxValue
+			 1,//defaultValue
+			 String(),//label (optional)
+			 [](int value, int maximumStringLength)
+	 {
+		 if (maximumStringLength > 2)
+		 {
+			 switch (value)
+			 {
+			 case 0:
+				 return "sin";
+			 case 1:
+				 return "saw";
+			 case 2:
+				 return "sqr";
+			 case 3:
+				 return "tri";
+			 default:
+				 return "wav";
+			 }
+		 }
+		 else
+		 {
+			 return " ";
+		 }
+	 },//stringFromInt (optional)
+			 nullptr//intFromString (optional)
+		 ),
+		 std::make_unique<AudioParameterInt>(
+			 "pitch" + labelNum,// parameter ID
+			 "pitch",// parameter name
+			 -3,//minValue
+			 3,//maxValue
+			 0,//defaultValue
+			 String(),//label (optional)
+			 nullptr,//stringFromInt
+			 nullptr//intFromString
+			 ),
+		 std::make_unique<AudioParameterInt>(
+			 "voiceNumber" + labelNum,// parameter ID
+			 "voiceNumber",// parameter name
+			 0,//minValue
+			 8,//maxValue
+			 6,//defaultValue
+			 String(),//label (optional)
+			 nullptr,//stringFromInt
+			 nullptr//intFromString
+			 ),
+		 std::make_unique<AudioParameterFloat>(
+			 "detune" + labelNum,// parameter ID
+			 "detune",// parameter name
+			 NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
+			 0.2f// default value
+			 ),
+		 std::make_unique<AudioParameterFloat>(
+			 "pan" + labelNum,// parameter ID
+			 "pan",// parameter name
+			 NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
+			 0.5f// default value
+			 ),
+		 std::make_unique<AudioParameterFloat>(
+			 "phase" + labelNum,// parameter ID
+			 "phase",// parameter name
+			 NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
+			 0.0f// default value
+			 ),
+		 std::make_unique<AudioParameterFloat>(
+			 "fine" + labelNum,// parameter ID
+			 "fine",// parameter name
+			 NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
+			 0.0f// default value
+			 ),
+		 std::make_unique<AudioParameterFloat>(
+			 "pulseWidth" + labelNum,// parameter ID
+			 "pulseWidth",// parameter name
+			 NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
+			 0.0f// default value
+			 ),
+		 std::make_unique<AudioParameterFloat>(
+			 "spread" + labelNum,// parameter ID
+			 "spread",// parameter name
+			 NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
+			 0.5f// default value
+			 ),
+		 std::make_unique<AudioParameterBool>(
+			 "retrig" + labelNum, // parameter ID
+			 "retrig",// parameter name
+			 false,// default Value
+			 String(),// label (optional)
+			 nullptr,//stringFromBool
+			 nullptr//boolFromString																
+			 ),
+		 std::make_unique<AudioParameterBool>(
+			 "fixed" + labelNum, // parameter ID
+			 "fixed",// parameter name
+			 false,// default Value
+			 String(),// label (optional)
+			 nullptr,//stringFromBool
+			 nullptr//boolFromString																
+			 )
+		 );
+	 return { std::move(oscillatorParameterGroup) };
+}
 private:
     WaveGenerator * oscillators[8];
     AudioProcessorValueTreeState& parameters;

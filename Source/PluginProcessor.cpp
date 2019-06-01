@@ -18,399 +18,39 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 	std::vector<std::unique_ptr<AudioProcessorParameterGroup>> oscillatorParameterGroups;
 	for (int i = 1; i < 5; ++i)
 	{
-		auto oscillatorParameterGroup = std::make_unique<AudioProcessorParameterGroup>("oscillator" + String(i), "oscillator" + String(i), "|");
-		oscillatorParameterGroup->addChild(
-			std::make_unique<AudioParameterFloat>(
-				"amplitude" + String(i),// parameter ID
-				"amplitude",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.5f// default value
-			),
-			std::make_unique<AudioParameterInt>(
-				"waveType" + String(i),// parameter ID
-				"waveType",// parameter name
-				0,//minValue
-				3,//maxValue
-				1,//defaultValue
-				String(),//label (optional)
-				[](int value, int maximumStringLength)
-		{
-			if (maximumStringLength > 2)
-			{
-				switch (value)
-				{
-				case 0:
-					return "sin";
-				case 1:
-					return "saw";
-				case 2:
-					return "sqr";
-				case 3:
-					return "tri";
-				default:
-					return "wav";
-				}
-			}
-			else
-			{
-				return " ";
-			}
-		},//stringFromInt (optional)
-				nullptr//intFromString (optional)
-			),
-			std::make_unique<AudioParameterInt>(
-				"pitch" + String(i),// parameter ID
-				"pitch",// parameter name
-				-3,//minValue
-				3,//maxValue
-				0,//defaultValue
-				String(),//label (optional)
-				nullptr,//stringFromInt
-				nullptr//intFromString
-			),
-			std::make_unique<AudioParameterInt>(
-				"voiceNumber" + String(i),// parameter ID
-				"voiceNumber",// parameter name
-				0,//minValue
-				8,//maxValue
-				6,//defaultValue
-				String(),//label (optional)
-				nullptr,//stringFromInt
-				nullptr//intFromString
-			),
-			std::make_unique<AudioParameterFloat>(
-				"detune" + String(i),// parameter ID
-				"detune",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.2f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"pan" + String(i),// parameter ID
-				"pan",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.5f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"phase" + String(i),// parameter ID
-				"phase",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"fine" + String(i),// parameter ID
-				"fine",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"pulseWidth" + String(i),// parameter ID
-				"pulseWidth",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"spread" + String(i),// parameter ID
-				"spread",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.5f// default value
-			),
-			std::make_unique<AudioParameterBool>(
-				"retrig" + String(i), // parameter ID
-				"retrig",// parameter name
-				false,// default Value
-				String(),// label (optional)
-				nullptr,//stringFromBool
-				nullptr//boolFromString																
-			),
-			std::make_unique<AudioParameterBool>(
-				"fixed" + String(i), // parameter ID
-				"fixed",// parameter name
-				false,// default Value
-				String(),// label (optional)
-				nullptr,//stringFromBool
-				nullptr//boolFromString																
-			)
-		);
-
-		oscillatorParameterGroups.push_back(std::move(oscillatorParameterGroup));
+		oscillatorParameterGroups.push_back(SuperWaveGenerator::createProcessorParameters(String(i)));
 	}
+	oscillatorParameterGroups.push_back(SuperWaveGenerator::createProcessorParameters());
 
+	//params.push_back(std::move(oscillatorParameterGroups));
 
-
-/* //THIS CODE WORKS!! I KEEP IT UNTIL I FIND THE SOLUTION
-    std::vector<std::unique_ptr<RangedAudioParameter>> parameters;
-	for (int i = 1; i < 5; ++i)
-	{
-		parameters.push_back(
-			std::make_unique<AudioParameterFloat>(
-				"amplitude" + String(i),// parameter ID
-				"amplitude",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.5f// default value
-			)
-		);
-		parameters.push_back(
-			std::make_unique<AudioParameterInt>(
-				"waveType" + String(i),// parameter ID
-				"waveType",// parameter name
-				0,//minValue
-				3,//maxValue
-				1,//defaultValue
-				String(),//label (optional)
-				[](int value, int maximumStringLength)
-				{
-					if (maximumStringLength > 2)
-					{
-						switch (value)
-						{
-						case 0:
-							return "sin";
-						case 1:
-							return "saw";
-						case 2:
-							return "sqr";
-						case 3:
-							return "tri";
-						default:
-							return "wav";
-						}
-					}
-					else
-					{
-						return " ";
-					}
-				},//stringFromInt (optional)
-				nullptr//intFromString (optional)
-			)
-		);
-		parameters.push_back(
-			std::make_unique<AudioParameterInt>(
-				"pitch" + String(i),// parameter ID
-				"pitch",// parameter name
-				-3,//minValue
-				3,//maxValue
-				0,//defaultValue
-				String(),//label (optional)
-				nullptr,//stringFromInt
-				nullptr//intFromString
-			)
-		);
-		parameters.push_back(
-			std::make_unique<AudioParameterInt>(
-				"voiceNumber" + String(i),// parameter ID
-				"voiceNumber",// parameter name
-				0,//minValue
-				8,//maxValue
-				6,//defaultValue
-				String(),//label (optional)
-				nullptr,//stringFromInt
-				nullptr//intFromString
-			)
-		);
-		parameters.push_back(
-			std::make_unique<AudioParameterFloat>(
-				"detune" + String(i),// parameter ID
-				"detune",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.2f// default value
-			)
-		);
-		parameters.push_back(
-			std::make_unique<AudioParameterFloat>(
-				"pan" + String(i),// parameter ID
-				"pan",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.5f// default value
-			)
-		);
-
-		parameters.push_back(
-			std::make_unique<AudioParameterFloat>(
-				"phase" + String(i),// parameter ID
-				"phase",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-			)
-		);
-		parameters.push_back(
-			std::make_unique<AudioParameterFloat>(
-				"fine" + String(i),// parameter ID
-				"fine",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-			)
-		);
-
-		parameters.push_back(
-			std::make_unique<AudioParameterFloat>(
-				"pulseWidth" + String(i),// parameter ID
-				"pulseWidth",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-			)
-		);
-		parameters.push_back(
-			std::make_unique<AudioParameterFloat>(
-				"spread" + String(i),// parameter ID
-				"spread",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.5f// default value
-			)
-		);
-		parameters.push_back(
-			std::make_unique<AudioParameterBool>(
-				"retrig" + String(i), // parameter ID
-				"retrig",// parameter name
-				false,// default Value
-				String(),// label (optional)
-				nullptr,//stringFromBool
-				nullptr//boolFromString																
-			)
-		);
-		parameters.push_back(
-			std::make_unique<AudioParameterBool>(
-				"fixed" + String(i), // parameter ID
-				"fixed",// parameter name
-				false,// default Value
-				String(),// label (optional)
-				nullptr,//stringFromBool
-				nullptr//boolFromString																
-				)
-		);
-	}*/
-	
 
 	auto oscillatorParameterGroup = std::make_unique<AudioProcessorParameterGroup>("oscillatorGroup", "oscillatorGroup", "|");
 	oscillatorParameterGroup->addChild(
 		std::make_unique<AudioProcessorParameterGroup>(
-			"oscillatorGroup",//groupID
-			"oscillatorGroup",//groupName
+			"Group",//groupID
+			"Group",//groupName
 			"|",//subgroupSeparator
-			std::make_unique<AudioParameterFloat>(
-			"amplitude",// parameter ID
-			"amplitude",// parameter name
-			NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-			0.5f// default value
-			),
-			std::make_unique<AudioParameterInt>(
-				"waveType",// parameter ID
-				"waveType",// parameter name
-				0,//minValue
-				3,//maxValue
-				1,//defaultValue
-				String(),//label (optional)
-				[](int value, int maximumStringLength)
-				{
-					if (maximumStringLength > 2)
-					{
-						switch (value)
-						{
-						case 0:
-							return "sin";
-						case 1:
-							return "saw";
-						case 2:
-							return "sqr";
-						case 3:
-							return "tri";
-						default:
-							return "wav";
-						}
-					}
-					else
-					{
-						return " ";
-					}
-				},//stringFromInt (optional)
-				nullptr//intFromString (optional)
-			),
-			std::make_unique<AudioParameterInt>(
-				"pitch",// parameter ID
-				"pitch",// parameter name
-				-3,//minValue
-				3,//maxValue
-				0,//defaultValue
-				String(),//label (optional)
-				nullptr,//stringFromInt
-				nullptr//intFromString
-			),
-			std::make_unique<AudioParameterInt>(
-				"voiceNumber",// parameter ID
-				"voiceNumber",// parameter name
-				0,//minValue
-				8,//maxValue
-				6,//defaultValue
-				String(),//label (optional)
-				nullptr,//stringFromInt
-				nullptr//intFromString
-			),
-			std::make_unique<AudioParameterFloat>(
-				"detune",// parameter ID
-				"detune",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.2f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"pan" ,// parameter ID
-				"pan",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.5f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"phase",// parameter ID
-				"phase",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"fine",// parameter ID
-				"fine",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"pulseWidth",// parameter ID
-				"pulseWidth",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-			),
-			std::make_unique<AudioParameterFloat>(
-				"spread",// parameter ID
-				"spread",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.5f// default value
-			),
-			std::make_unique<AudioParameterBool>(
-				"retrig", // parameter ID
-				"retrig",// parameter name
-				false,// default Value
-				String(),// label (optional)
-				nullptr,//stringFromBool
-				nullptr//boolFromString																
-			),
-			std::make_unique<AudioParameterBool>(
-				"fixed", // parameter ID
-				"fixed",// parameter name
-				false,// default Value
-				String(),// label (optional)
-				nullptr,//stringFromBool
-				nullptr//boolFromString																
-			),
 			std::make_unique<AudioParameterFloat>(
 				"ampAttack",// parameter ID
 				"ampAttack",// parameter name
 				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
 				0.0f// default value
-			),
+				),
 			std::make_unique<AudioParameterFloat>(
 				"globalLevel",// parameter ID
 				"globalLevel",// parameter name
 				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
 				0.5f// default value
+				)
 			)
-		)
-	);
-	params.push_back(std::move(oscillatorParameterGroup));
+		);
+	oscillatorParameterGroups.push_back(std::move(oscillatorParameterGroup));
+	//params.push_back(std::move(oscillatorParameterGroup));
+
+
+
+
 
 	/*parameters.push_back(
 		std::make_unique<AudioParameterFloat>(
@@ -463,7 +103,7 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 		//)
 	);*/
 
-	return { params.begin(), params.end()}; //std::move(oscillatorParameterGroup)
+	return { oscillatorParameterGroups.begin(), oscillatorParameterGroups.end()}; //std::move(oscillatorParameterGroup)
 }
 SuperSynthAudioProcessor::SuperSynthAudioProcessor()
 : parameters (*this, nullptr, Identifier ("SupersynthAPVTS"), createParameterLayout())
