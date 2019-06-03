@@ -15,15 +15,11 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 {
 	std::vector<std::unique_ptr<AudioProcessorParameterGroup>> params;
 
-	std::vector<std::unique_ptr<AudioProcessorParameterGroup>> oscillatorParameterGroups;
 	for (int i = 1; i < 5; ++i)
 	{
 		oscillatorParameterGroups.push_back(SuperWaveGenerator::createProcessorParameters(String(i)));
 	}
-	oscillatorParameterGroups.push_back(SuperWaveGenerator::createProcessorParameters());
-
-	//params.push_back(std::move(oscillatorParameterGroups));
-
+	params.push_back(SuperWaveGenerator::createProcessorParameters());
 
 	auto oscillatorParameterGroup = std::make_unique<AudioProcessorParameterGroup>("oscillatorGroup", "oscillatorGroup", "|");
 	oscillatorParameterGroup->addChild(
@@ -45,7 +41,7 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 				)
 			)
 		);
-	oscillatorParameterGroups.push_back(std::move(oscillatorParameterGroup));
+	params.push_back(std::move(oscillatorParameterGroup));
 	//params.push_back(std::move(oscillatorParameterGroup));
 
 
@@ -103,7 +99,7 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 		//)
 	);*/
 
-	return { oscillatorParameterGroups.begin(), oscillatorParameterGroups.end()}; //std::move(oscillatorParameterGroup)
+	return { params.begin(), params.end()}; //std::move(oscillatorParameterGroup)
 }
 SuperSynthAudioProcessor::SuperSynthAudioProcessor()
 : parameters (*this, nullptr, Identifier ("SupersynthAPVTS"), createParameterLayout())
