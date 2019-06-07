@@ -17,7 +17,7 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 
 	for (int i = 1; i < 5; ++i)
 	{
-		oscillatorParameterGroups.push_back(SuperWaveGenerator::createProcessorParameters(String(i)));
+		params.push_back(SuperWaveGenerator::createProcessorParameters(String(i)));
 	}
 	params.push_back(SuperWaveGenerator::createProcessorParameters());
 
