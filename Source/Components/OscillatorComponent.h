@@ -37,23 +37,25 @@ public:
     void resized();
 
 private:
-    /*amp, wave, pitch, voices, detune
-  pan, phase, fine, pw,     Spread*/
-  
+    /*creates a Label with the given text and textValueSuffix.*/
+    void createLabel(Label *label, const String &text);
+    
+    /*creates a slider with the given text and textValueSuffix.*/
+    void createSlider(Slider *slider, const String &newID);
+    
+    /*creates a slider with the given text and textValueSuffix.*/
+    void createSlider(Slider *slider, const String &newID, const String &suffix);
+    
     GroupComponent oscillatorGroup;
     
     Slider amplitudeSlider;
-    Slider panSlider;
-    
+    Slider panSlider;    
     Slider waveTypeSlider;
-    Slider phaseSlider;
-    
+    Slider phaseSlider;    
     Slider pitchSlider;
-    Slider fineSlider;
-    
+    Slider fineSlider;    
     Slider voiceNumberSlider;
-    Slider pulseWidthSlider;
-    
+    Slider pulseWidthSlider;    
     Slider detuneSlider;
     Slider spreadSlider;
     
@@ -61,39 +63,29 @@ private:
     ToggleButton fixedButton;
 
     Label amplitudeLabel;
-    Label panLabel;
-    
+    Label panLabel;    
     Label waveTypeLabel;
-    Label phaseLabel;
-    
+    Label phaseLabel;    
     Label pitchLabel;
-    Label fineLabel;
-    
+    Label fineLabel;    
     Label voiceNumberLabel;
-    Label pulseWidthLabel;
-    
+    Label pulseWidthLabel;    
     Label detuneLabel;
     Label spreadLabel;
-
     Label retrigLabel;
     Label fixedLabel;
     
-    ScopedPointer<SliderAttachment> amplitudeAttachment;
-    ScopedPointer<SliderAttachment> panAttachment;
-    
-    ScopedPointer<SliderAttachment> waveTypeAttachment;
-    ScopedPointer<SliderAttachment> phaseAttachment;
-    
-    ScopedPointer<SliderAttachment> pitchAttachment;
-    ScopedPointer<SliderAttachment> fineAttachment;
-
-    ScopedPointer<SliderAttachment> voiceNumberAttachment;
-    ScopedPointer<SliderAttachment> pulseWidthAttachment;
-    
-    ScopedPointer<SliderAttachment> detuneAttachment;
-    ScopedPointer<SliderAttachment> spreadAttachment;
-    
-    ScopedPointer<ButtonAttachment> retrigAttachment;
+    std::unique_ptr<SliderAttachment> amplitudeAttachment;
+    std::unique_ptr<SliderAttachment> panAttachment;    
+    std::unique_ptr<SliderAttachment> waveTypeAttachment;
+    std::unique_ptr<SliderAttachment> phaseAttachment;    
+    std::unique_ptr<SliderAttachment> pitchAttachment;
+    std::unique_ptr<SliderAttachment> fineAttachment;
+    std::unique_ptr<SliderAttachment> voiceNumberAttachment;
+    std::unique_ptr<SliderAttachment> pulseWidthAttachment;    
+    std::unique_ptr<SliderAttachment> detuneAttachment;
+    std::unique_ptr<SliderAttachment> spreadAttachment;    
+    std::unique_ptr<ButtonAttachment> retrigAttachment;
     
     AudioProcessorValueTreeState& valueTreeState;
     
