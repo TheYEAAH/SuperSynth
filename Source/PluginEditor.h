@@ -52,5 +52,7 @@ private:
     ScopedPointer<OscillatorComponent> oscillator;
     ScopedPointer<ModulationMatrixComponent> modulationMatrix;
     ScopedPointer<FilterComponent> filter;
+    MidiKeyboardState keyboardState;
+    MidiKeyboardComponent keyboardComponent;
 
 };

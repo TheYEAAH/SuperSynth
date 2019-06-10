@@ -13,19 +13,20 @@
 
 //==============================================================================
 SuperSynthAudioProcessorEditor::SuperSynthAudioProcessorEditor (AudioProcessor& parent, AudioProcessorValueTreeState& vts)
-: AudioProcessorEditor (parent), valueTreeState (vts)
+:
+    AudioProcessorEditor (parent),
+    valueTreeState (vts),
+    keyboardComponent (keyboardState, MidiKeyboardComponent::horizontalKeyboard)
 {
-/*amp, wave, pitch, voices, detune
-  pan, phase, fine, pw,     Spread*/
     setLookAndFeel (&otherLookAndFeel);
-    
+    addAndMakeVisible (keyboardComponent);
     addAndMakeVisible (modulationMatrix = new ModulationMatrixComponent());
 
     addAndMakeVisible (oscillator = new OscillatorComponent(valueTreeState));
 
     addAndMakeVisible (filter = new FilterComponent(valueTreeState));
     
-    setSize (oscillator->getWidth()*4 + modulationMatrix->getWidth(),oscillator->getHeight() + filter->getHeight());
+    setSize (oscillator->getWidth()*4 + modulationMatrix->getWidth(),oscillator->getHeight() + filter->getHeight() + 100);
 }
 
 SuperSynthAudioProcessorEditor::~SuperSynthAudioProcessorEditor()
@@ -39,7 +40,7 @@ SuperSynthAudioProcessorEditor::~SuperSynthAudioProcessorEditor()
 void SuperSynthAudioProcessorEditor::paint (Graphics& g)
 {
     //g.fillAll (Colours::white);
-    g.setColour (Colours::black);//white
+    g.setColour (Colours::black);
     /*g.setFont (20.0f);
     g.drawFittedText ("YEAAH", getLocalBounds(), Justification::centred, 1);*/
     
@@ -51,16 +52,17 @@ void SuperSynthAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
     // sets the position and size of the slider with arguments (x, y, width, height)
-
+    keyboardComponent.setSize (oscillator->getWidth()*4 + modulationMatrix->getWidth(), 100);//width,height
+    
     Rectangle<int> r = getLocalBounds();
+    Rectangle<int> keyboardSection = r.removeFromBottom(keyboardComponent.getHeight());
     Rectangle<int> processorsSection = r.removeFromLeft(oscillator->getWidth());
         
     {
     oscillator->setBounds(processorsSection.removeFromTop(oscillator->getHeight()));
     filter->setBounds(processorsSection.removeFromLeft(filter->getWidth()));
     modulationMatrix->setBounds(r.removeFromRight(modulationMatrix->getWidth()));
-    
-    
+    keyboardComponent.setBounds(keyboardSection.removeFromTop(keyboardComponent.getHeight()));
     }
 }
 /*
