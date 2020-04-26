@@ -40,7 +40,7 @@ public:
     void controllerMoved (int /*controllerNumber*/, int /*newValue*/) override;
     
     /** Implementation of the SynthesiserVoice method. */
-    void renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples) override;
+    void renderNextBlock (AudioBuffer< float > &outputBuffer, int startSample, int numSamples) override;
 
 private:
     double currentAngle, angleDelta, tailOff;
@@ -48,6 +48,6 @@ private:
     SuperWaveGenerator * oscillator;
     IIRFilter leftFilter;
     IIRFilter rightFilter;
-    //IIRFilterAudioSource filter;
+
     AudioProcessorValueTreeState& parameters;
 };

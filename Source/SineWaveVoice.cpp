@@ -70,7 +70,7 @@ void SineWaveVoice::controllerMoved (int /*controllerNumber*/, int /*newValue*/)
     // not implemented for the purposes of this demo!
 }
 
-void SineWaveVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
+void SineWaveVoice::renderNextBlock (AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
 {
     if (angleDelta != 0.0)
     {
@@ -124,3 +124,34 @@ void SineWaveVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startS
     }
     
 }
+
+/*void SineWaveVoice::renderNextBlock(AudioBuffer<double> &outputBuffer, int startSample, int numSamples)
+{
+	if (angleDelta != 0.0)
+	{
+		if (tailOff > 0)//on a arrêté d'appuyer sur la touche, release
+		{
+			while (--numSamples >= 0)
+			{
+				tailOff *= 0.99;
+
+				if (tailOff <= 0.005)
+				{
+					// tells the synth that this voice has stopped
+					clearCurrentNote();
+					//delete oscillator;//on libère la case mémoire pointée par le WaveGenerator (on efface pas le pointeur)
+					angleDelta = 0.0;
+					break;
+				}
+			}
+		}
+		else
+		{
+			oscillator->renderNextBlock(outputBuffer, startSample, numSamples);
+			leftFilter.processSamples(outputBuffer.getWritePointer(0), numSamples);//left channel
+			rightFilter.processSamples(outputBuffer.getWritePointer(1), numSamples);//right channel
+		}
+
+	}
+
+}*/
