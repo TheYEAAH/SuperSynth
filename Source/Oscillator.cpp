@@ -17,7 +17,6 @@ void Oscillator::setSampleRate(double sampleRate) {
 }
 
 void Oscillator::generate(double* buffer, int nFrames) {
-    const double twoPI = 2 * mPI;
     switch (mOscillatorWaveType) {
         case OSCILLATOR_WAVETYPE_SINE:
             for (int i = 0; i < nFrames; i++) {
@@ -107,6 +106,7 @@ double Oscillator::naiveWaveformForWaveType(OscillatorWaveType waveType) {
             value = 2.0 * (fabs(value) - 0.5);
             break;
         default:
+			value = 0.0;
             break;
     }
     return value;

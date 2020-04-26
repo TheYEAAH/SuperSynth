@@ -124,25 +124,6 @@ const String SuperSynthAudioProcessor::getName() const
     return JucePlugin_Name;
 }
 
-const String SuperSynthAudioProcessor::getInputChannelName (int channelIndex) const
-{
-    return String (channelIndex + 1);
-}
-
-const String SuperSynthAudioProcessor::getOutputChannelName (int channelIndex) const
-{
-    return String (channelIndex + 1);
-}
-
-bool SuperSynthAudioProcessor::isInputChannelStereoPair (int index) const
-{
-    return true;
-}
-
-bool SuperSynthAudioProcessor::isOutputChannelStereoPair (int index) const
-{
-    return true;
-}
 
 bool SuperSynthAudioProcessor::acceptsMidi() const
 {
@@ -160,11 +141,6 @@ bool SuperSynthAudioProcessor::producesMidi() const
    #else
     return false;
    #endif
-}
-
-bool SuperSynthAudioProcessor::silenceInProducesSilenceOut() const
-{
-    return false;
 }
 
 double SuperSynthAudioProcessor::getTailLengthSeconds() const
@@ -276,7 +252,7 @@ void SuperSynthAudioProcessor::getStateInformation (MemoryBlock& destData)
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 
-    ScopedPointer<XmlElement> xml (parameters.state.createXml());
+	std::unique_ptr<XmlElement> xml (parameters.state.createXml());
     copyXmlToBinary (*xml, destData);
 
 }
@@ -285,7 +261,7 @@ void SuperSynthAudioProcessor::setStateInformation (const void* data, int sizeIn
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-    ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+	std::unique_ptr<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
     if (xmlState != nullptr)
         if (xmlState->hasTagName (parameters.state.getType()))
             parameters.state = ValueTree::fromXml (*xmlState);

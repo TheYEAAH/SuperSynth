@@ -26,7 +26,7 @@ SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters,
     parameters.addParameterListener	("detune", this);
     parameters.addParameterListener	("spread", this);
     parameters.addParameterListener	("amplitude", this);
-
+    parameters.addParameterListener	("fine", this);
     /*
     création des oscillateurs. chaque oscillateur a une fréquence qui dépend du detune
     Si le nombre d'oscillateurs est pair, les impairs seront detunés au dessus, les pairs en dessous
