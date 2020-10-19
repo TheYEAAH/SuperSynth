@@ -8,10 +8,11 @@
               pluginIsSynth="1" pluginWantsMidiIn="1" pluginProducesMidiOut="1"
               pluginSilenceInIsSilenceOut="0" pluginEditorRequiresKeys="0"
               pluginAUExportPrefix="SuperSynthAU" pluginRTASCategory="" aaxIdentifier="com.yourcompany.SuperSynth"
-              pluginAAXCategory="2" jucerVersion="5.4.7" pluginIsMidiEffectPlugin="0"
-              buildAUv3="0" displaySplashScreen="1" reportAppUsage="1" splashScreenColour="Dark"
+              pluginAAXCategory="2" pluginIsMidiEffectPlugin="0" buildAUv3="0"
+              displaySplashScreen="1" reportAppUsage="1" splashScreenColour="Dark"
               buildStandalone="0" enableIAA="0" cppLanguageStandard="11" companyName="YEAAH"
-              pluginFormats="buildVST" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn,pluginProducesMidiOut">
+              pluginFormats="buildVST" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn,pluginProducesMidiOut"
+              jucerFormatVersion="1">
   <MAINGROUP id="E0hLrL" name="SimpleSuperSynth">
     <GROUP id="{2E572B2F-BF6C-772C-805C-DC939BDAAD62}" name="Source">
       <GROUP id="{567E80D6-2318-A7AE-26FA-6DACCD49318E}" name="Components">
