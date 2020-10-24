@@ -27,30 +27,30 @@ public:
     void resized() override;
 
 private:
-    /*creates a Label with the given text and textValueSuffix.*/
-    void createLabel(Label *label, const String &text);
+    /*creates a Label with the given text.*/
+    void createLabel(Label &label, const String &text);
+    
+    /*creates a slider with the given text.*/
+    void createSlider(Slider &slider, const String &newID);
     
     /*creates a slider with the given text and textValueSuffix.*/
-    void createSlider(Slider *slider, const String &newID);
+    void createSlider(Slider &slider, const String &newID, const String &suffix);
     
-    /*creates a slider with the given text and textValueSuffix.*/
-    void createSlider(Slider *slider, const String &newID, const String &suffix);
+    GroupComponent filterGroup;
     
-    ScopedPointer<GroupComponent> filterGroup;
-    
-    ScopedPointer<Slider> cutoffSlider;
-    ScopedPointer<Slider> resonance;
+    Slider cutoffSlider;
+    Slider resonance;
     //Slider keyTrack;
     //Slider velocity;
-    ScopedPointer<ComboBox> filterType;
+    ComboBox filterType;
     
-    ScopedPointer<Label> cutoffLabel;
-    ScopedPointer<Label> resonanceLabel;
-    ScopedPointer<Label> filterTypeLabel;
+    Label cutoffLabel;
+    Label resonanceLabel;
+    Label filterTypeLabel;
     //Label keyTrackLabel;
     //Label velocityLabel;
     
-    ScopedPointer<SliderAttachment> cutoffAttachment;
+    std::unique_ptr<SliderAttachment> cutoffAttachment;
     AudioProcessorValueTreeState& valueTreeState;    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterComponent)

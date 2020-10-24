@@ -143,9 +143,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
 
 OscillatorComponent::~OscillatorComponent()
 {
-    //delete oscillatorGroup;
-    //delete amplitude;
-
 }
 
 

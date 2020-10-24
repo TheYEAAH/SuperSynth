@@ -17,31 +17,31 @@ public:
 
 private:
     /*creates a Label with the given text and textValueSuffix.*/
-    void createLabel(Label *label, const String &text);
+    void createLabel(Label &label, const String &text);
     
     /*creates a slider with the given text and textValueSuffix.*/
-    void createSlider(Slider *slider, const String &newID);
+    void createSlider(Slider &slider, const String &newID);
     
     /*creates a slider with the given text and textValueSuffix.*/
-    void createSlider(Slider *slider, const String &newID, const String &suffix);
+    void createSlider(Slider &slider, const String &newID, const String &suffix);
     
-    ScopedPointer<GroupComponent> envelopeGroup;
+    GroupComponent envelopeGroup;
     
-    ScopedPointer<Slider> attackSlider;
-    ScopedPointer<Slider> decaySlider;
-    ScopedPointer<Slider> sustainSlider;
-    ScopedPointer<Slider> releaseSlider;
+    Slider attackSlider;
+    Slider decaySlider;
+    Slider sustainSlider;
+    Slider releaseSlider;
 
-    ScopedPointer<Label> attackLabel;
-    ScopedPointer<Label> decayLabel;
-    ScopedPointer<Label> sustainLabel;
-    ScopedPointer<Label> releaseLabel;
+    Label attackLabel;
+    Label decayLabel;
+    Label sustainLabel;
+    Label releaseLabel;
 
 
-    ScopedPointer<SliderAttachment> attackAttachment;
-    ScopedPointer<SliderAttachment> decayAttachment;
-    ScopedPointer<SliderAttachment> sustainAttachment;
-    ScopedPointer<SliderAttachment> releaseAttachment;
+    std::unique_ptr<SliderAttachment> attackAttachment;
+    std::unique_ptr<SliderAttachment> decayAttachment;
+    std::unique_ptr<SliderAttachment> sustainAttachment;
+    std::unique_ptr<SliderAttachment> releaseAttachment;
     
     AudioProcessorValueTreeState& valueTreeState;
     
