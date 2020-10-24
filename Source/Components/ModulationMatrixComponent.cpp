@@ -16,14 +16,22 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
 
     //sourcesComboBox
     createComboBox(sourcesComboBox = new ComboBox ("new combo box"),"Select a source");
-    sourcesComboBox->addItem (TRANS("Env 1"), 1);
-    sourcesComboBox->addItem (TRANS("Env 2"), 2);
-    sourcesComboBox->addItem (TRANS("LFO 1"), 3);
-    sourcesComboBox->addItem (TRANS("LFO 2"), 4);
     
+    for (int i = 0; i < 5; i++)
+    {
+        sourcesComboBox->addItem (TRANS("mod" + String(i)), i);
+    }
+
+   
     //targetsComboBox
     createComboBox(targetsComboBox = new ComboBox ("new combo box"),"Select a target");
-    targetsComboBox->addItem (TRANS("Filter1:cutoff"), 1);
+    for (int i = 0; i < 5; i++) //number of audioProcessors
+    {
+        for (int j = 0; j < 5; j++) //number of parameters of the audioProcessor
+        {
+            targetsComboBox->addItem (TRANS("Processor" + String(i) + ":" + "parameter" + String(j)), (5 * i) + j);
+        }
+    }
     
     //Columns labels
     createLabel(labelSources = new Label ("new label", TRANS("Sources")), "Sources");

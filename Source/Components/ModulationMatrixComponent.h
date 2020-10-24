@@ -26,9 +26,8 @@ public:
     };
 
     void resized() override;
+    
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
-
-
 
 private:
     /*creates a Label with the given text and textValueSuffix.*/
@@ -42,6 +41,9 @@ private:
     
     /*creates a slider with the given text and textValueSuffix.*/
     void createSlider(Slider *slider, const String &newID, const String &suffix);
+    
+    /*Creates a modulation row.*/
+    //void createModulationRow
     
     ScopedPointer<Slider> slider;
     ScopedPointer<ToggleButton> toggleButton;

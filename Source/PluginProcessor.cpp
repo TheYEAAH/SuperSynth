@@ -42,11 +42,6 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 			)
 		);
 	params.push_back(std::move(oscillatorParameterGroup));
-	//params.push_back(std::move(oscillatorParameterGroup));
-
-
-
-
 
 	/*parameters.push_back(
 		std::make_unique<AudioParameterFloat>(
