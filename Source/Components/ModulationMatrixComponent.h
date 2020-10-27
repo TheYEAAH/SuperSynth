@@ -32,6 +32,7 @@ public:
 private:
     /*creates a Label with the given text and textValueSuffix.*/
     void createLabel(Label *label, const String &newText);
+    void createLabel(Label &label, const String &newText);
     
     /*creates a ComboBox with the given text and textValueSuffix.*/
     void createComboBox(ComboBox *comboBox, const String &newTooltip);
@@ -42,17 +43,17 @@ private:
     /*creates a slider with the given text and textValueSuffix.*/
     void createSlider(Slider *slider, const String &newID, const String &suffix);
     
-    /*Creates a modulation row.*/
-    //void createModulationRow
+    Label labelSources;
+    Label labelTargets;
+    Label labelModAmount;
     
+    /*Creates a modulation row.*/
+    //void createModulationRow    
     ScopedPointer<Slider> modulationSlider;
     ScopedPointer<ToggleButton> toggleButton;
     ScopedPointer<ComboBox> sourcesComboBox;
     ScopedPointer<ComboBox> targetsComboBox;
-    ScopedPointer<Label> labelSources;
-    ScopedPointer<Label> labelTargets;
-    ScopedPointer<Label> labelModAmount;
-    ScopedPointer<Label> labelTo;
+    ScopedPointer<Label> labelTo;//label with "->" text
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ModulationMatrixComponent)
 };

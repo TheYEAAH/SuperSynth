@@ -33,13 +33,21 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
         }
     }
     
-    //Columns labels
-    createLabel(labelSources = new Label ("new label", TRANS("Sources")), "Sources");
-    createLabel (labelTargets = new Label ("new label", TRANS("Targets")),"Targets");
-
-    createLabel (labelModAmount = new Label ("new label", TRANS("ModAmount")),"ModAmount");
     createLabel (labelTo = new Label ("new label", TRANS("->")),"->");
+        
+    //Columns labels
+    labelSources.setName("new label");
+    labelSources.setText(TRANS("Sources"), dontSendNotification);
+    createLabel(labelSources, "Sources");
+    
+    labelTargets.setName("new label");
+    labelTargets.setText(TRANS("Targets"), dontSendNotification);
+    createLabel (labelTargets, "Targets");
 
+    labelModAmount.setName("new label");
+    labelModAmount.setText(TRANS("ModAmount"), dontSendNotification);
+    createLabel (labelModAmount,"ModAmount");
+    
     setSize (sourceColumnWidth +toLabelWidth + targetColumnWidth + toggleButtonWidth + paramSliderWidth, 600);
 
 }
@@ -50,9 +58,6 @@ ModulationMatrixComponent::~ModulationMatrixComponent()
     toggleButton = nullptr;
     sourcesComboBox = nullptr;
     targetsComboBox = nullptr;
-    labelSources = nullptr;
-    labelTargets = nullptr;
-    labelModAmount = nullptr;
     labelTo = nullptr;
 }
 
@@ -64,10 +69,10 @@ void ModulationMatrixComponent::resized()
 
     //Column titles
     Rectangle<int> firstRow = r.removeFromTop(rowHeight);
-    labelSources->setBounds(firstRow.removeFromLeft(sourceColumnWidth));
+    labelSources.setBounds(firstRow.removeFromLeft(sourceColumnWidth));
     firstRow.removeFromLeft(toLabelWidth);
-    labelTargets->setBounds(firstRow.removeFromLeft(targetColumnWidth));
-    labelModAmount->setBounds(firstRow.removeFromLeft(toggleButtonWidth + paramSliderWidth));
+    labelTargets.setBounds(firstRow.removeFromLeft(targetColumnWidth));
+    labelModAmount.setBounds(firstRow.removeFromLeft(toggleButtonWidth + paramSliderWidth));
 
     //rows
     modulationSlider->setSize (paramSliderWidth,paramSliderWidth);
@@ -93,14 +98,23 @@ void ModulationMatrixComponent::comboBoxChanged (ComboBox* comboBoxThatHasChange
 
 void ModulationMatrixComponent::createLabel(Label *label, const String &newText)
 {
-    labelSources->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
-    labelSources->setJustificationType (Justification::centredLeft);
-    labelSources->setEditable (false, false, false);
-    labelSources->setColour (TextEditor::textColourId, Colours::black);
-    labelSources->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    label->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
+    label->setJustificationType (Justification::centredLeft);
+    label->setEditable (false, false, false);
+    label->setColour (TextEditor::textColourId, Colours::black);
+    label->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
     addAndMakeVisible (label);
 }
 
+void ModulationMatrixComponent::createLabel(Label &label, const String &newText)
+{
+    label.setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
+    label.setJustificationType (Justification::centredLeft);
+    label.setEditable (false, false, false);
+    label.setColour (TextEditor::textColourId, Colours::black);
+    label.setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    addAndMakeVisible (label);
+}
 void ModulationMatrixComponent::createSlider(Slider *slider, const String &newID)
 {
     slider->setSliderStyle (Slider::RotaryVerticalDrag);
