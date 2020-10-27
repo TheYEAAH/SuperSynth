@@ -9,10 +9,10 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
     toggleButton->setButtonText (String());
 
 
-    addAndMakeVisible (slider = new Slider ("new slider"));
-    slider->setRange (0, 10, 0);
-    slider->setSliderStyle (Slider::RotaryVerticalDrag);
-    slider->setTextBoxStyle (Slider::NoTextBox, true, 0, 0);
+    addAndMakeVisible (modulationSlider = new Slider ("new slider"));
+    modulationSlider->setRange (0, 10, 0);
+    modulationSlider->setSliderStyle (Slider::RotaryVerticalDrag);
+    modulationSlider->setTextBoxStyle (Slider::NoTextBox, true, 0, 0);
 
     //sourcesComboBox
     createComboBox(sourcesComboBox = new ComboBox ("new combo box"),"Select a source");
@@ -46,7 +46,7 @@ ModulationMatrixComponent::ModulationMatrixComponent ()
 
 ModulationMatrixComponent::~ModulationMatrixComponent()
 {
-    slider = nullptr;
+    modulationSlider = nullptr;
     toggleButton = nullptr;
     sourcesComboBox = nullptr;
     targetsComboBox = nullptr;
@@ -70,7 +70,7 @@ void ModulationMatrixComponent::resized()
     labelModAmount->setBounds(firstRow.removeFromLeft(toggleButtonWidth + paramSliderWidth));
 
     //rows
-    slider->setSize (paramSliderWidth,paramSliderWidth);
+    modulationSlider->setSize (paramSliderWidth,paramSliderWidth);
 
     Rectangle<int> row = r.removeFromTop(rowHeight);
     sourcesComboBox->setBounds (row.removeFromLeft(sourceColumnWidth).withSizeKeepingCentre(sourceColumnWidth,comboBoxHeight));
@@ -78,7 +78,7 @@ void ModulationMatrixComponent::resized()
     targetsComboBox->setBounds (row.removeFromLeft(targetColumnWidth).withSizeKeepingCentre(sourceColumnWidth,comboBoxHeight));
     toggleButton->setBounds (row.removeFromLeft(toggleButtonWidth));
     toggleButton->changeWidthToFitText();	
-    slider->setBounds (row.removeFromLeft(paramSliderWidth));
+    modulationSlider->setBounds (row.removeFromLeft(paramSliderWidth));
 }
 
 void ModulationMatrixComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)

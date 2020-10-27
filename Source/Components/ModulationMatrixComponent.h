@@ -45,7 +45,7 @@ private:
     /*Creates a modulation row.*/
     //void createModulationRow
     
-    ScopedPointer<Slider> slider;
+    ScopedPointer<Slider> modulationSlider;
     ScopedPointer<ToggleButton> toggleButton;
     ScopedPointer<ComboBox> sourcesComboBox;
     ScopedPointer<ComboBox> targetsComboBox;
