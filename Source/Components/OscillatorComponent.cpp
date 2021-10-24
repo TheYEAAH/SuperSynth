@@ -151,8 +151,6 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts, cons
 
     addAndMakeVisible (fixedButton);
     
-
-    
 }
 
 OscillatorComponent::~OscillatorComponent()
