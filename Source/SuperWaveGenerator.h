@@ -52,7 +52,7 @@ class SuperWaveGenerator : public AudioProcessorValueTreeState::Listener
 {
 public:
     /** Creates a SuperWaveGenerator. */
-    SuperWaveGenerator(AudioProcessorValueTreeState& parameters, float frequency = 440.);
+    SuperWaveGenerator(AudioProcessorValueTreeState& parameters, String oscillatorID, float frequency = 440.);
     
     /** Destructor. */
 	~SuperWaveGenerator();
@@ -92,7 +92,7 @@ public:
     //void setPhase(float newPhase);//sets phase value, between 0 - 1
     //void setPulseWidth
     
-    static std::unique_ptr<AudioProcessorParameterGroup> SuperWaveGenerator::createProcessorParameters (const String& labelNum = String() )
+static std::unique_ptr<AudioProcessorParameterGroup> SuperWaveGenerator::createProcessorParameters (const String& labelNum)
 {
 	 auto oscillatorParameterGroup = std::make_unique<AudioProcessorParameterGroup>("oscillator" + labelNum, "oscillator" + labelNum, "|");
 	 oscillatorParameterGroup->addChild(
@@ -214,4 +214,5 @@ private:
     AudioProcessorValueTreeState& parameters;
     float frequency;
     Random random;
+    String oscillatorID;
 };

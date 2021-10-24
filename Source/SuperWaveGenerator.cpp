@@ -11,21 +11,21 @@
 #include "superwavegenerator.h"
 
 //Constructeur par défault et surchargé
-SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters, float frequency)
-: parameters(parameters), frequency(frequency)
+SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters, String oscillatorID, float frequency)
+: parameters(parameters), oscillatorID(oscillatorID), frequency(frequency)
 {   
     
-    parameters.addParameterListener	("waveType", this);
+    parameters.addParameterListener	("waveType" + oscillatorID, this);
 
     /*
     parameters.addParameterListener	("frequency", this);
     parameters.addParameterListener	("phase", this);
     parameters.addParameterListener	("pulseWidth", this);*/
-    parameters.addParameterListener	("retrig", this);
-    parameters.addParameterListener	("voiceNumber", this);
-    parameters.addParameterListener	("detune", this);
-    parameters.addParameterListener	("spread", this);
-    parameters.addParameterListener	("amplitude", this);
+    parameters.addParameterListener	("retrig" + oscillatorID, this);
+    parameters.addParameterListener	("voiceNumber" + oscillatorID, this);
+    parameters.addParameterListener	("detune" + oscillatorID, this);
+    parameters.addParameterListener	("spread" + oscillatorID, this);
+    parameters.addParameterListener	("amplitude" + oscillatorID, this);
 
     /*
     création des oscillateurs. chaque oscillateur a une fréquence qui dépend du detune
@@ -35,10 +35,10 @@ SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters,
     */
 
     int voiceNumber = 8;//(int) *parameters.getRawParameterValue ("voiceNumber");
-    float detune = *parameters.getRawParameterValue ("detune");
-    float spread = *parameters.getRawParameterValue ("spread");
+    float detune = *parameters.getRawParameterValue ("detune" + oscillatorID);
+    float spread = *parameters.getRawParameterValue ("spread" + oscillatorID);
     
-    bool retrig = (bool) *parameters.getRawParameterValue ("retrig");
+    bool retrig = (bool) *parameters.getRawParameterValue ("retrig" + oscillatorID);
     if(voiceNumber & 1)// voiceNumber est impair
     {
         oscillators[0] = new WaveGenerator(frequency);
@@ -63,7 +63,7 @@ SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters,
             //oscillators[i] = new WaveGenerator(frequency - pow(-1,i)* n*(frequency*pow(2,detune/12)-frequency));
 
             if(i & 1)//oscillateur impair
-            {   //frequence oscillateur=frequency * 2^(detune amount/12) avec detune amount entre 0 et 1
+            {   //frequence oscillateur = frequency * 2^(detune amount/12) avec detune amount entre 0 et 1
                 oscillators[i] = new WaveGenerator(frequency * pow(2,2 * detune / (12*(voiceNumber-(i/2)))));
             }
             else
@@ -80,10 +80,10 @@ SuperWaveGenerator::SuperWaveGenerator(AudioProcessorValueTreeState& parameters,
         }
     }
     //on vérifie le spread
-    setWaveType((int) *parameters.getRawParameterValue ("waveType"));
+    setWaveType((int) *parameters.getRawParameterValue ("waveType" + oscillatorID));
     setSpread(spread);
     setDetune(detune);
-    setAmplitude(*parameters.getRawParameterValue ("amplitude"));
+    setAmplitude(*parameters.getRawParameterValue ("amplitude" + oscillatorID));
 
 }
 //Constructeur de copie
@@ -102,17 +102,17 @@ SuperWaveGenerator::~SuperWaveGenerator()
 /*
     parameters.removeParameterListener	("phase", this);
     parameters.removeParameterListener	("pulseWidth", this);*/
-    parameters.removeParameterListener	("waveType", this);
-    parameters.removeParameterListener	("retrig", this);
-    parameters.removeParameterListener	("voiceNumber", this);
-    parameters.removeParameterListener	("detune", this);
-    parameters.removeParameterListener	("spread", this);
-    parameters.removeParameterListener	("amplitude", this);
+    parameters.removeParameterListener	("waveType" + oscillatorID, this);
+    parameters.removeParameterListener	("retrig" + oscillatorID, this);
+    parameters.removeParameterListener	("voiceNumber" + oscillatorID, this);
+    parameters.removeParameterListener	("detune" + oscillatorID, this);
+    parameters.removeParameterListener	("spread" + oscillatorID, this);
+    parameters.removeParameterListener	("amplitude" + oscillatorID, this);
 }
 
 void SuperWaveGenerator::renderNextBlock(AudioSampleBuffer& outputBuffer, int startSample, int numSamples) const
 {
-    for (int i=0; i < (int) *parameters.getRawParameterValue ("voiceNumber"); i++)
+    for (int i=0; i < (int) *parameters.getRawParameterValue ("voiceNumber" + oscillatorID); i++)
 
     {
         oscillators[i]->renderNextBlock(outputBuffer, startSample, numSamples);
@@ -128,7 +128,7 @@ void SuperWaveGenerator::setFrequency(float newFrequency)
 
 void SuperWaveGenerator::setAmplitude(float newAmplitude)
 {
-    for (int i(0); i < (int) *parameters.getRawParameterValue ("voiceNumber"); i++)
+    for (int i(0); i < (int) *parameters.getRawParameterValue ("voiceNumber" + oscillatorID); i++)
     {
         oscillators[i]->setAmplitude(newAmplitude);
     }
@@ -137,8 +137,8 @@ void SuperWaveGenerator::setAmplitude(float newAmplitude)
 void SuperWaveGenerator::setDetune(float newDetune)
 {
     
-    int voiceNumber = (int) *parameters.getRawParameterValue ("voiceNumber");
-    float detune = *parameters.getRawParameterValue ("detune");
+    int voiceNumber = (int) *parameters.getRawParameterValue ("voiceNumber" + oscillatorID);
+    float detune = *parameters.getRawParameterValue ("detune" + oscillatorID);
     
     if(voiceNumber & 1)// voiceNumber est impair
     {
@@ -175,7 +175,7 @@ void SuperWaveGenerator::setDetune(float newDetune)
 
 float SuperWaveGenerator::getDetune() const
 {
-    return *parameters.getRawParameterValue ("detune");
+    return *parameters.getRawParameterValue ("detune" + oscillatorID);
 }
 
 void SuperWaveGenerator::setVoiceNumber(int newVoiceNumber)
@@ -199,14 +199,14 @@ void SuperWaveGenerator::setVoiceNumber(int newVoiceNumber)
             oscillators[i] = NULL;
         }
     }*/
-    setSpread(*parameters.getRawParameterValue ("spread"));
-    setDetune(*parameters.getRawParameterValue ("detune"));
+    setSpread(*parameters.getRawParameterValue ("spread" + oscillatorID));
+    setDetune(*parameters.getRawParameterValue ("detune" + oscillatorID));
 
 }
 
 void SuperWaveGenerator::setSpread(float newSpread)
 {
-    int voiceNumber = (int) *parameters.getRawParameterValue ("voiceNumber");
+    int voiceNumber = (int) *parameters.getRawParameterValue ("voiceNumber" + oscillatorID);
     //float spread = *parameters.getRawParameterValue ("spread");
     float spread = newSpread;//ou la ligne précédente au choix
     
@@ -257,26 +257,26 @@ void SuperWaveGenerator::setWaveType(int newWaveType)
 
 void SuperWaveGenerator::parameterChanged(const String &parameterID, float newValue)
 {
-    if (parameterID == "waveType")
+    if (parameterID == "waveType" + oscillatorID)
     {
         setWaveType((int) newValue);
     }
-    if (parameterID == "detune")
+    if (parameterID == "detune" + oscillatorID)
     {
         setDetune(newValue);
     }
     
-    if (parameterID == "spread")
+    if (parameterID == "spread" + oscillatorID)
     {
         setSpread(newValue);
     }
     
-    if (parameterID == "voiceNumber")
+    if (parameterID == "voiceNumber" + oscillatorID)
     {
         setVoiceNumber((int) newValue);
     }
     
-    if (parameterID == "amplitude")
+    if (parameterID == "amplitude" + oscillatorID)
     {
         setAmplitude(newValue);
     }

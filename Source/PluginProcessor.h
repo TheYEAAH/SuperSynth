@@ -66,7 +66,7 @@ private:
     Synthesiser synth;
 
     //VARIABLES
-    AudioProcessorValueTreeState parameters;//attached to only one processor, have the same lifetime as the processor
+    AudioProcessorValueTreeState parametersAPVS;//attached to only one processor, have the same lifetime as the processor
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SuperSynthAudioProcessor)
 };

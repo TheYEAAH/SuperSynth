@@ -34,7 +34,7 @@ void SineWaveVoice::startNote (int midiNoteNumber, float velocity, SynthesiserSo
     angleDelta = cyclesPerSample * 2.0 * double_Pi;
     
     //à l'activation de la note on crée un SuperWaveGenerator
-    oscillator = new SuperWaveGenerator(parameters,(float)cyclesPerSecond);
+    oscillator = new SuperWaveGenerator(parameters, "1", (float)cyclesPerSecond);
     state = 1;
     
 }

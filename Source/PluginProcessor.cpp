@@ -15,35 +15,37 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 {
 	std::vector<std::unique_ptr<AudioProcessorParameterGroup>> params;
 
-	for (int i = 1; i < 5; ++i)
-	{
-		params.push_back(SuperWaveGenerator::createProcessorParameters(String(i)));
-	}
-	params.push_back(SuperWaveGenerator::createProcessorParameters());
+    for (int i = 0; i < 1; ++i)//only one oscillator for test
+    {
+        params.push_back(SuperWaveGenerator::createProcessorParameters(String(i + 1)));
+    }
+	//params.push_back(SuperWaveGenerator::createProcessorParameters());
 
-	auto oscillatorParameterGroup = std::make_unique<AudioProcessorParameterGroup>("oscillatorGroup", "oscillatorGroup", "|");
-	oscillatorParameterGroup->addChild(
-		std::make_unique<AudioProcessorParameterGroup>(
-			"Group",//groupID
-			"Group",//groupName
-			"|",//subgroupSeparator
-			std::make_unique<AudioParameterFloat>(
-				"ampAttack",// parameter ID
-				"ampAttack",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.0f// default value
-				),
-			std::make_unique<AudioParameterFloat>(
-				"globalLevel",// parameter ID
-				"globalLevel",// parameter name
-				NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
-				0.5f// default value
-				)
-			)
-		);
-	params.push_back(std::move(oscillatorParameterGroup));
+	
 
-	/*parameters.push_back(
+	auto masterParameterGroup = std::make_unique<AudioProcessorParameterGroup>("masterGroup", "masterGroup", "|");
+    masterParameterGroup->addChild(
+        std::make_unique<AudioProcessorParameterGroup>(
+            "Group",//groupID
+            "Group",//groupName
+            "|",//subgroupSeparator
+            std::make_unique<AudioParameterFloat>(
+                "ampAttack",// parameter ID
+                "ampAttack",// parameter name
+                NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
+                0.0f// default value
+                ),
+            std::make_unique<AudioParameterFloat>(
+                "globalLevel",// parameter ID
+                "globalLevel",// parameter name
+                NormalisableRange<float>(0.0f, 1.0f),//normalisable Range
+                0.5f// default value
+                )
+            )
+    );
+	params.push_back(std::move(masterParameterGroup));
+
+/*parameters.push_back(
 		std::make_unique<AudioParameterFloat>(
 			"ampSustain",// parameter ID
 			"ampSustain",// parameter name
@@ -97,13 +99,13 @@ AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 	return { params.begin(), params.end()}; //std::move(oscillatorParameterGroup)
 }
 SuperSynthAudioProcessor::SuperSynthAudioProcessor()
-: parameters (*this, nullptr, Identifier ("SupersynthAPVTS"), createParameterLayout())
+: parametersAPVS (*this, nullptr, Identifier ("SupersynthAPVS"), createParameterLayout())
 {                                             
     //initializing the synth 
     const int numVoices = 128;//128 voices
     // Add some voices...
     for (int i = numVoices; --i >= 0;)
-        synth.addVoice (new SineWaveVoice(parameters));
+        synth.addVoice (new SineWaveVoice(parametersAPVS));
     // ..and give the synth a sound to play
     synth.addSound (new SineWaveSound());
 
@@ -248,7 +250,7 @@ void SuperSynthAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuff
     
     const int numSamples = buffer.getNumSamples();
     synth.renderNextBlock (buffer, midiMessages, 0, numSamples);
-    buffer.applyGain (*parameters.getRawParameterValue ("globalLevel"));
+    buffer.applyGain (*parametersAPVS.getRawParameterValue ("globalLevel"));
     
  
 }
@@ -261,7 +263,7 @@ bool SuperSynthAudioProcessor::hasEditor() const
 
 AudioProcessorEditor* SuperSynthAudioProcessor::createEditor()
 {
-    return new SuperSynthAudioProcessorEditor (*this, parameters);
+    return new SuperSynthAudioProcessorEditor (*this, parametersAPVS);
 }
 
 //==============================================================================
@@ -270,7 +272,7 @@ void SuperSynthAudioProcessor::getStateInformation (MemoryBlock& destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
-    auto state = parameters.copyState();
+    auto state = parametersAPVS.copyState();
     std::unique_ptr<juce::XmlElement> xml(state.createXml());
     copyXmlToBinary(*xml, destData);
 
@@ -283,8 +285,8 @@ void SuperSynthAudioProcessor::setStateInformation (const void* data, int sizeIn
     std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
 
     if (xmlState.get() != nullptr)
-        if (xmlState->hasTagName(parameters.state.getType()))
-            parameters.replaceState(juce::ValueTree::fromXml(*xmlState));
+        if (xmlState->hasTagName(parametersAPVS.state.getType()))
+            parametersAPVS.replaceState(juce::ValueTree::fromXml(*xmlState));
 }
 
 //==============================================================================

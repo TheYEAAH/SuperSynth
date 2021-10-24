@@ -21,7 +21,8 @@ SuperSynthAudioProcessorEditor::SuperSynthAudioProcessorEditor (AudioProcessor& 
     
     addAndMakeVisible (modulationMatrix = new ModulationMatrixComponent());
 
-    addAndMakeVisible (oscillator = new OscillatorComponent(valueTreeState));
+    addAndMakeVisible(oscillator = new OscillatorComponent(vts, "1"));
+    //valueTreeState.state.getChildWithName ("oscillator1");
 
     addAndMakeVisible (filter = new FilterComponent(valueTreeState));
     
@@ -56,11 +57,9 @@ void SuperSynthAudioProcessorEditor::resized()
     Rectangle<int> processorsSection = r.removeFromLeft(oscillator->getWidth());
         
     {
-    oscillator->setBounds(processorsSection.removeFromTop(oscillator->getHeight()));
-    filter->setBounds(processorsSection.removeFromLeft(filter->getWidth()));
-    modulationMatrix->setBounds(r.removeFromRight(modulationMatrix->getWidth()));
-    
-    
+        oscillator->setBounds(processorsSection.removeFromTop(oscillator->getHeight()));
+        filter->setBounds(processorsSection.removeFromLeft(filter->getWidth()));
+        modulationMatrix->setBounds(r.removeFromRight(modulationMatrix->getWidth()));
     }
 }
 /*

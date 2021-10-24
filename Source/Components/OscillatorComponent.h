@@ -31,21 +31,36 @@ public:
     typedef AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
     
     /** Creates an OscillatorComponent. It is an editor specially made for the SuperWaveGenerator Class. */
-    OscillatorComponent(AudioProcessorValueTreeState& vts);    
+    OscillatorComponent(AudioProcessorValueTreeState& vts, const String& labelNum);    
     ~OscillatorComponent();
 
     void resized();
 
 private:
     /*creates a Label with the given text and textValueSuffix.*/
-    void createLabel(Label *label, const String &text);
+    //void createLabel(Label *label, const String &text);
+    
+    /*creates a Label with the given text and textValueSuffix.*/
+    void createLabel(Label &label, const String &text);
+    
+    /*creates a slider.*/
+    //void createSlider(Slider *slider);
+    
+    /*creates a slider with the given text */
+    //void createSlider(Slider *slider, const String &newID);
     
     /*creates a slider with the given text and textValueSuffix.*/
-    void createSlider(Slider *slider, const String &newID);
+   // void createSlider(Slider *slider, const String &newID, const String &suffix);
+    
+    /*creates a slider.*/
+    void createSlider(Slider &slider);
+    
+    /*creates a slider with the given text.*/
+    //void createSlider(Slider &slider, const String &newID);
     
     /*creates a slider with the given text and textValueSuffix.*/
-    void createSlider(Slider *slider, const String &newID, const String &suffix);
-    
+    //void createSlider(Slider &slider, const String &newID, const String &suffix);
+       
     GroupComponent oscillatorGroup;
     
     Slider amplitudeSlider;

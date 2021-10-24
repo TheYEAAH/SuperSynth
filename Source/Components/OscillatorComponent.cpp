@@ -11,7 +11,7 @@
 #include "OscillatorComponent.h"
 
 //==============================================================================
-OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
+OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts, const String& labelNum)
 : valueTreeState (vts)
 {
 
@@ -25,24 +25,38 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     setSize (5 * paramLabelWidth + 6, 3 * paramControlHeight + 13);
 
     //oscillatorGroup
-    oscillatorGroup.setText("Oscillator");
+    oscillatorGroup.setText("Oscillator" + labelNum);
     addAndMakeVisible (oscillatorGroup);
+
     
-    //amplitude
-    //Label
-    amplitudeLabel.setFont (Font (12.00f, Font::plain));   
+    // Here are code tries to programmaticaly create the sliders from the AudioProcessorValueTreeState
+    //getParentComponent()->Processor->getParameterTree();
+    /* valueTreeState.state.getParameter ("amplitude" + labelNum)->getName();
+    
     amplitudeLabel.setText ("amplitude", dontSendNotification);
+    addAndMakeVisible (amplitudeLabel);
     
 	amplitudeSlider.setSliderStyle(Slider::RotaryVerticalDrag);
 	amplitudeSlider.setTextBoxStyle(Slider::TextBoxAbove, true, paramSliderWidth, paramLabelHeight);
 	addAndMakeVisible(amplitudeSlider);
+
+    amplitudeAttachment.reset(new SliderAttachment (valueTreeState, "amplitude" + labelNum, amplitudeSlider));
+    */
+    
     
 
-    addAndMakeVisible (amplitudeLabel);
+    //amplitude
+     /*amplitudeLabel.setText ("amplitude", dontSendNotification);
+    addAndMakeVisible (amplitudeLabel);*/   
+    
+    createLabel(amplitudeLabel, "amplitude");
+    
+	/* amplitudeSlider.setSliderStyle(Slider::RotaryVerticalDrag);
+	amplitudeSlider.setTextBoxStyle(Slider::TextBoxAbove, true, paramSliderWidth, paramLabelHeight);
+	addAndMakeVisible(amplitudeSlider);*/
+	createSlider(amplitudeSlider);
 
-   
-    //addAndMakeVisible (amplitudeSlider);
-    amplitudeAttachment.reset(new SliderAttachment (valueTreeState, "amplitude", amplitudeSlider));
+    amplitudeAttachment.reset(new SliderAttachment (valueTreeState, "amplitude" + labelNum, amplitudeSlider));
     
    //pan  
     panLabel.setText ("pan", dontSendNotification);
@@ -51,7 +65,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     panSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     panSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);
     addAndMakeVisible (panSlider);
-    panAttachment.reset(new SliderAttachment (valueTreeState, "pan", panSlider));
+    panAttachment.reset(new SliderAttachment (valueTreeState, "pan" + labelNum, panSlider));
         
     waveTypeLabel.setText ("waveType", dontSendNotification);
     addAndMakeVisible (waveTypeLabel);
@@ -59,7 +73,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     waveTypeSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     waveTypeSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);
     addAndMakeVisible (waveTypeSlider);
-    waveTypeAttachment.reset(new SliderAttachment (valueTreeState, "waveType", waveTypeSlider));
+    waveTypeAttachment.reset(new SliderAttachment (valueTreeState, "waveType" + labelNum, waveTypeSlider));
     
     phaseLabel.setText ("phase", dontSendNotification);
     addAndMakeVisible (phaseLabel);
@@ -67,7 +81,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     phaseSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     phaseSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);
     addAndMakeVisible (phaseSlider);
-    phaseAttachment.reset(new SliderAttachment (valueTreeState, "phase", phaseSlider));
+    phaseAttachment.reset(new SliderAttachment (valueTreeState, "phase" + labelNum, phaseSlider));
     
     pitchLabel.setText ("pitch", dontSendNotification);
     addAndMakeVisible (pitchLabel);
@@ -75,7 +89,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     pitchSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     pitchSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);
     addAndMakeVisible (pitchSlider);
-    pitchAttachment.reset(new SliderAttachment (valueTreeState, "pitch", pitchSlider));
+    pitchAttachment.reset(new SliderAttachment (valueTreeState, "pitch" + labelNum, pitchSlider));
     
     fineLabel.setText ("fine", dontSendNotification);
     addAndMakeVisible (fineLabel);
@@ -83,7 +97,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     fineSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     fineSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);
     addAndMakeVisible (fineSlider);
-    fineAttachment.reset(new SliderAttachment (valueTreeState, "fine", fineSlider));
+    fineAttachment.reset(new SliderAttachment (valueTreeState, "fine" + labelNum, fineSlider));
     
     voiceNumberLabel.setText ("voiceNumber", dontSendNotification);
     addAndMakeVisible (voiceNumberLabel);
@@ -91,7 +105,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     voiceNumberSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     voiceNumberSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);    
     addAndMakeVisible (voiceNumberSlider);
-    voiceNumberAttachment.reset(new SliderAttachment (valueTreeState, "voiceNumber", voiceNumberSlider));
+    voiceNumberAttachment.reset(new SliderAttachment (valueTreeState, "voiceNumber" + labelNum, voiceNumberSlider));
 
     pulseWidthLabel.setText ("pulseWidth", dontSendNotification);
     addAndMakeVisible (pulseWidthLabel);
@@ -99,7 +113,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     pulseWidthSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     pulseWidthSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);        
     addAndMakeVisible (pulseWidthSlider);
-    pulseWidthAttachment.reset(new SliderAttachment (valueTreeState, "pulseWidth", pulseWidthSlider));
+    pulseWidthAttachment.reset(new SliderAttachment (valueTreeState, "pulseWidth" + labelNum, pulseWidthSlider));
     
     
     detuneLabel.setText ("detune", dontSendNotification);
@@ -108,7 +122,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     detuneSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     detuneSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);      
     addAndMakeVisible (detuneSlider);
-    detuneAttachment.reset(new SliderAttachment (valueTreeState, "detune", detuneSlider));
+    detuneAttachment.reset(new SliderAttachment (valueTreeState, "detune" + labelNum, detuneSlider));
     
     spreadLabel.setText ("spread", dontSendNotification);
     addAndMakeVisible (spreadLabel);
@@ -116,7 +130,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     spreadSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     spreadSlider.setTextBoxStyle(Slider::TextBoxAbove,true,paramSliderWidth,paramLabelHeight);           
     addAndMakeVisible (spreadSlider);
-    spreadAttachment.reset(new SliderAttachment (valueTreeState, "spread", spreadSlider));
+    spreadAttachment.reset(new SliderAttachment (valueTreeState, "spread" + labelNum, spreadSlider));
     
     //retrig
     retrigLabel.setEditable (false, false, false);
@@ -126,7 +140,7 @@ OscillatorComponent::OscillatorComponent(AudioProcessorValueTreeState& vts)
     addAndMakeVisible (retrigLabel);
 
     addAndMakeVisible (retrigButton);
-    retrigAttachment.reset(new ButtonAttachment (valueTreeState, "retrig", retrigButton));
+    retrigAttachment.reset(new ButtonAttachment (valueTreeState, "retrig" + labelNum, retrigButton));
     
     //fixed
     fixedLabel.setEditable (false, false, false);
@@ -218,29 +232,61 @@ void OscillatorComponent::resized()
     }
 }
 
-void OscillatorComponent::createLabel(Label *label, const String &newText)
+
+
+void OscillatorComponent::createLabel(Label &label, const String &text)
 {
-    label->setFont (Font (12.00f, Font::plain));
-    label->setJustificationType (Justification::centred);
-    label->setEditable (false, false, false);
-    label->setColour (TextEditor::textColourId, Colours::black);
-    label->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
-    label->setText (newText, dontSendNotification);
+    label.setText (text, dontSendNotification);
     addAndMakeVisible (label);
 }
 
-void OscillatorComponent::createSlider(Slider *slider, const String &newID)
+/*void OscillatorComponent::createLabel(Label *label, const String &text)
+{
+    label->setText (text, dontSendNotification);
+    addAndMakeVisible (label);
+}
+
+void OscillatorComponent::createSlider(Slider *slider)
 {
     slider->setSliderStyle (Slider::RotaryVerticalDrag);
-    slider->setRange (0.0, 1.0, 0.0);
     slider->setTextBoxStyle (Slider::TextBoxAbove, true, paramSliderWidth,paramLabelHeight);
-    slider->setPopupDisplayEnabled (false, true, this);
-    slider->setValue (1.0);
-    slider->setComponentID(newID);
+    addAndMakeVisible (slider);
+    addAndMakeVisible (slider);
+}*/
+
+/*void OscillatorComponent::createSlider(Slider *slider, const String &newID)
+{
+    slider->setSliderStyle (Slider::RotaryVerticalDrag);
+    slider->setTextBoxStyle (Slider::TextBoxAbove, true, paramSliderWidth,paramLabelHeight);
+    addAndMakeVisible (slider);
     addAndMakeVisible (slider);
 }
 void OscillatorComponent::createSlider(Slider *slider, const String &newID, const String &suffix)
 {
     createSlider(slider, newID);
     slider->setTextValueSuffix (suffix);
+}*/
+
+void OscillatorComponent::createSlider(Slider &slider)
+{
+    slider.setSliderStyle (Slider::RotaryVerticalDrag);
+    slider.setTextBoxStyle (Slider::TextBoxAbove, true, OscillatorComponent::paramSliderWidth, OscillatorComponent::paramSliderHeight);
+    addAndMakeVisible (slider);
+    addAndMakeVisible (slider);
 }
+/*void OscillatorComponent::createSlider(Slider &slider, const String &newID)
+{
+    slider.setSliderStyle (Slider::RotaryVerticalDrag);
+    slider.setRange (0.0, 1.0, 0.0);
+    slider.setTextBoxStyle (Slider::NoTextBox, true, 40, 12);
+    slider.setPopupDisplayEnabled (false, true, this);
+    slider.setValue (1.0);
+    slider.setComponentID(newID);
+    addAndMakeVisible (slider);
+}
+void OscillatorComponent::createSlider(Slider &slider, const String &newID, const String &suffix)
+{
+    createSlider(slider, newID);
+    slider.setTextValueSuffix (suffix);
+    addAndMakeVisible (slider);
+}*/
